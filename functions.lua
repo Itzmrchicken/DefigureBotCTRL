@@ -5,6 +5,8 @@ local lp = Players.LocalPlayer
 
 local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))
 
+print(SendCommand)
+
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
 
