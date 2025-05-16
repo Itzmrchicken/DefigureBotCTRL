@@ -43,7 +43,7 @@ local CommandDef = {
 }
 
 print("Before")
-local functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/functions.lua"))()
+-- local functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/functions.lua"))()
 print("After")
 
 local Prefix = getgenv().Data.Prefix
