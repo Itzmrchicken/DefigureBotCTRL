@@ -65,10 +65,10 @@ function functions.load()
       
       	task.wait()
       end
-
-      print("###########################")
-      print("###########################")
+      
       print("✅Bots Loaded✅")
+      print("###########################")
+      print("###########################")
 end
 
 print(string.format("[%.2f] functions.lua", (tick()-load_start)*1000))
