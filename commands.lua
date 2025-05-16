@@ -135,7 +135,7 @@ return function(Msg, functions)
 
 		functions.ChatAll("Rejoining...")
 
-		task.wait(math.random(0, 2.5))
+		task.wait(math.random(1, 2.5))
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
