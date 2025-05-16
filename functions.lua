@@ -42,6 +42,12 @@ function functions.ChatAll(Msg)
 end
 
 function functions.load()
+      print("###########################")
+      print("###########################")
+      print("🔁Loading DefigureBotCTRL...🔁")
+      
+      task.wait(1)
+      
       for _, player in pairs(Players:GetPlayers()) do
       	player.Chatted:Connect(function(Message)
       		-- if player.Name ~= Master then return end
@@ -52,17 +58,17 @@ function functions.load()
       end
       for i, v in pairs(Bots) do
       	if lp.Name == v then
-                  game.Loaded:Wait()
-                  
-      		functions.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
+                  functions.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
       
       		break
       	end
       
       	task.wait()
       end
-      
-      print("loaded bots")
+
+      print("###########################")
+      print("###########################")
+      print("✅Bots Loaded✅")
 end
 
 print(string.format("[%.2f] functions.lua", (tick()-load_start)*1000))
