@@ -1,13 +1,4 @@
-local Bots = {
-	-- "Chicken_BotA1",
-	-- "Chicken_BotA2",
-	"AD0_0HD",
-	"Chicken_BotA3",
-	"Chicken_BotA4",
-	"Chicken_BotA5",
-	"Chicken_BotA6",
-	"Chicken_BotA7"
-}
+local Bots = getgenv().Data.Bots
 local Values = {
 	Follow = false,
 	FollowTarget = nil,
