@@ -6,6 +6,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local lp = Players.LocalPlayer
 
 local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))()
+print(string.format("[%.2f] commands.lua", (tick()-load_start)*1000))
 
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
