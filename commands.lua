@@ -1,3 +1,5 @@
+print("Loading commands...")
+
 local Players = game:GetService("Players")
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -49,7 +51,7 @@ return function(Msg, functions)
 	local Split = Msg:split(" ")
 	local Cmd = Split[1]:lower()
 
-	-- print(Cmd)
+	print(Cmd)
 	
 	if Cmd == Prefix.."chat" then
 		local ChatMsg = Msg:gsub(Cmd, "")
