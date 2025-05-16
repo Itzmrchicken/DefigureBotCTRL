@@ -3,6 +3,8 @@ local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local lp = Players.LocalPlayer
 
+local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))()
+
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
 
@@ -34,6 +36,28 @@ function functions.ChatAll(Msg)
   			break
   		end
   	end
+end
+
+function functions.load()
+      for _, player in pairs(Players:GetPlayers()) do
+      	player.Chatted:Connect(function(Message)
+      		-- if player.Name ~= Master then return end
+      		if player.Name ~= Master and not table.find(Bots, player.Name) then return end
+      
+      		SendCommand(Message)
+      	end)
+      end
+      for i, v in pairs(Bots) do
+      	if lp.Name == v then
+      		self.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
+      
+      		break
+      	end
+      
+      	task.wait()
+      end
+      
+      print("loaded bots")
 end
 
 return functions
