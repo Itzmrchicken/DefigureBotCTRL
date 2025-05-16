@@ -270,6 +270,7 @@ return function(Msg, functions)
 		functions.BotChat(1, "Changing masters...")
 		
 		Master = User.Name
+		getgenv().Data.Master = Master
 
 		functions.BotChat(1, Master.." is the new master, do .cmds to view commands")
 		functions.BotChat(1, "!clear")
