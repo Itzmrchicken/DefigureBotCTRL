@@ -48,6 +48,8 @@ local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
 
 return function(Msg, functions)
+	Master = getgenv().Data.Master
+	
 	local Split = Msg:split(" ")
 	local Cmd = Split[1]:lower()
 
