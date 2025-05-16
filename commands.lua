@@ -1,3 +1,8 @@
+local Players = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local lp = Players.LocalPlayer
+
 local Bots = getgenv().Data.Bots
 local Values = {
 	Follow = false,
