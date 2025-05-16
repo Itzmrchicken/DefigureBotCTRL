@@ -1,3 +1,5 @@
+local load_start = tick()
+
 local Players = game:GetService("Players")
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -61,5 +63,7 @@ function functions.load()
       
       print("loaded bots")
 end
+
+print(string.format("[%.2f] functions.lua", (tick()-load_start)*1000)
 
 return functions
