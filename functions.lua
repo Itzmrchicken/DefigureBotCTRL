@@ -49,6 +49,8 @@ function functions.load()
       end
       for i, v in pairs(Bots) do
       	if lp.Name == v then
+                  game.Loaded:Wait()
+                  
       		functions.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
       
       		break
