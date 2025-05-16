@@ -5,6 +5,8 @@ local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local lp = Players.LocalPlayer
 
+local version = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/version.lua"))()
+
 local Bots = getgenv().Data.Bots
 local Values = {
 	Follow = false,
@@ -120,6 +122,9 @@ return function(Msg, functions)
 		functions.BotChat(1, "Listed commands")
 		task.wait(1)
 		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und")
+	end
+	if Cmd == Prefix.."version" then
+		functions.BotChat(1, "Current version"..tostring(version))
 	end
 	if Cmd == Prefix.."reset" then
 		functions.ChatAll("Resetting...")
