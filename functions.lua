@@ -3,7 +3,7 @@ local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local lp = Players.LocalPlayer
 
-local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))()
+local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))
 
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
