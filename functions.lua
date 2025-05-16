@@ -44,7 +44,7 @@ function functions.load()
       		-- if player.Name ~= Master then return end
       		if player.Name ~= Master and not table.find(Bots, player.Name) then return end
       
-      		SendCommand(Message)
+      		SendCommand(Message, functions)
       	end)
       end
       for i, v in pairs(Bots) do
