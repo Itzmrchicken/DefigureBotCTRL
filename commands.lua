@@ -378,7 +378,7 @@ return function(Msg, functions)
 				end
 
 				while (Values.Fling and Values.FlingTarget) and task.wait() do
-					HRP.CFrame = UserHRP.CFrame * CFrame.new(0, math.random(-3, 3), 0)
+					HRP.CFrame = UserHRP.CFrame * CFrame.new(math.random(-3, 3), 0, 0)
 
 					if not Values.Fling or not Values.FlingTarget or not UserCharacter then
 						workspace.Gravity = GlobalValues.Gravity
