@@ -37,6 +37,8 @@ local CommandDef = {
 	["nm"] = "Bot control permissions (perm transfer, cancelled during re-execution)",
 }
 
+local functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/functions.lua"))()
+
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
 
@@ -49,7 +51,7 @@ return function(Msg)
 	if Cmd == Prefix.."chat" then
 		local ChatMsg = Msg:gsub(Cmd, "")
 
-		ChatAll(ChatMsg)
+		functions.ChatAll(ChatMsg)
 	end
 	if Cmd == Prefix.."follow" then
 		local User = Players:FindFirstChild(Split[2])
@@ -108,12 +110,12 @@ return function(Msg)
 		Values.FollowTarget = nil
 	end
 	if Cmd == Prefix.."cmds" then
-		BotChat(1, "Listed commands")
+		functions.BotChat(1, "Listed commands")
 		task.wait(1)
-		BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und")
+		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und")
 	end
 	if Cmd == Prefix.."reset" then
-		ChatAll("Resetting...")
+		functions.ChatAll("Resetting...")
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
@@ -126,7 +128,7 @@ return function(Msg)
 	if Cmd == Prefix.."rj" then
 		local TPS = game:GetService("TeleportService")
 
-		ChatAll("Rejoining...")
+		functions.ChatAll("Rejoining...")
 
 		task.wait(math.random(0, 2.5))
 
@@ -181,7 +183,9 @@ return function(Msg)
 		end
 	end
 	if Cmd == Prefix.."leave" then
-		BotChat(1, "Leaving the game...")
+		functions.BotChat(1, "Leaving the game...")
+
+		task.wait(1)
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
@@ -251,26 +255,26 @@ return function(Msg)
 	if Cmd == Prefix.."dance" then
 		local DanceType = "/e dance"..(Split[2] or math.random(1, 3))
 
-		ChatAll(DanceType)
+		functions.ChatAll(DanceType)
 	end
 	if Cmd == Prefix.."nm" then
 		local User = Players:FindFirstChild(Split[2])
 
-		-- if not User then return ChatAll(Split[2], " isn't a valid user") end
+		-- if not User then return functions.ChatAll(Split[2], " isn't a valid user") end
 
-		BotChat(1, "Changing masters...")
+		functions.BotChat(1, "Changing masters...")
 		
 		Master = User.Name
 
-		BotChat(1, Master.." is the new master, do .cmds to view commands")
-		BotChat(1, "!clear")
+		functions.BotChat(1, Master.." is the new master, do .cmds to view commands")
+		functions.BotChat(1, "!clear")
 	end
 	if Cmd == Prefix.."define" then
 		local CmdDef = CommandDef[Split[2]]
 
-		if not CmdDef then return BotChat(1, "Looks like that's an invalid command, try again!") end
+		if not CmdDef then return functions.BotChat(1, "Looks like that's an invalid command, try again!") end
 
-		BotChat(1, CmdDef)
+		functions.BotChat(1, CmdDef)
 	end
 	if Cmd == Prefix.."d" then
 		local User = Players:FindFirstChild(Split[2])
@@ -324,7 +328,7 @@ return function(Msg)
 			end
 		end
 
-		BotChat(1, "The current bot count is "..InGame)
+		functions.BotChat(1, "The current bot count is "..InGame)
 	end
 	if Cmd == Prefix.."fling" then
 		local User = Players:FindFirstChild(Split[2])
