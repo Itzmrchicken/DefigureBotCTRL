@@ -64,6 +64,6 @@ function functions.load()
       print("loaded bots")
 end
 
-print(string.format("[%.2f] functions.lua", (tick()-load_start)*1000)
+print(string.format("[%.2f] functions.lua", (tick()-load_start)*1000))
 
 return functions
