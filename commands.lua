@@ -1,3 +1,54 @@
+local Bots = {
+	-- "Chicken_BotA1",
+	-- "Chicken_BotA2",
+	"AD0_0HD",
+	"Chicken_BotA3",
+	"Chicken_BotA4",
+	"Chicken_BotA5",
+	"Chicken_BotA6",
+	"Chicken_BotA7"
+}
+local Values = {
+	Follow = false,
+	FollowTarget = nil,
+
+	Swarm = false,
+	SwarmTarget = nil,
+
+	Line = false,
+	LineTarget = nil,
+
+	D = false,
+	DTarget = nil,
+
+	Fling = false,
+	FlingTarget = nil,
+	SpinINST = nil,
+	FlingVelINST = nil
+}
+local GlobalValues = {
+	Gravity = workspace.Gravity
+}
+local CommandDef = {
+	["chat"] = "Makes the bots chat the provided message. USE: chat {message - nil to reset}",
+	["follow"] = "Makes the bots walk towards a provided player. USE: follow {user - nil to reset}",
+	["cmds"] = "Shows the list of commands",
+	["define"] = "Defines a command. USE: define {command_name}",
+	["reset"] = "Resets the bots",
+	["rj"] = "Makes the bots rejoin the current server",
+	["swarm"] = "Makes the bots buzz around a provided player. USE: swarm {user - nil to reset}",
+	["leave"] = "Kicks the bots from the game",
+	["goto"] = "Teleports the bots to a provided player. USE: goto {user}",
+	["line"] = "Creates a line on a provided player and uses args. USE: line {user - nil to reset} {spacing}",
+	["dance"] = "Makes the bots dance. USE: dance {1, 2, 3}",
+	["gravity"] = "Sets the bots world gravity. USE: gravity {number}",
+	["count"] = "Amount of bots activated",
+	["nm"] = "Bot control permissions (perm transfer, cancelled during re-execution)",
+}
+
+local Prefix = getgenv().Data.Prefix
+local Master = getgenv().Data.Master
+
 return function(Msg)
 	local Split = Msg:split(" ")
 	local Cmd = Split[1]:lower()
