@@ -126,6 +126,22 @@ return function(Msg, functions)
 	if Cmd == Prefix.."version" then
 		functions.BotChat(1, "Current version"..tostring(version))
 	end
+	if Cmd == Prefix.."whitelist" then
+		if not Players:FindFirstChild(Split[2]) then
+			functions.BotChat(1, "Invalid user, make sure it's the full username and not display name")
+			return
+		end
+		
+		if table.find(getgenv().Data.Whitelist, Split[2]) then
+			functions.BotChat(1, "Removing "..Split[2].." from the whitelist")
+
+			table.remove(getgenv().Data.Whitelist, Split[2])
+		else
+			functions.BotChat(1, "Adding "..Split[2].." to the whitelist")
+
+			table.insert(getgenv().Data.Whitelist, Split[2])
+		end
+	end
 	if Cmd == Prefix.."reset" then
 		functions.ChatAll("Resetting...")
 
