@@ -42,7 +42,7 @@ local CommandDef = {
 	["nm"] = "Bot control permissions (perm transfer, cancelled during re-execution)",
 }
 
-local functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/functions.lua"))
+local functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/functions.lua"))()
 
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
