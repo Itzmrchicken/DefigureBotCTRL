@@ -3,7 +3,7 @@ local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local lp = Players.LocalPlayer
 
-local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))
+local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))()
 
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
@@ -24,14 +24,14 @@ function functions.BotChat(Username, Msg)
   
   	for i, v in pairs(Bots) do
   		if Index == i and lp.Name == v then
-  			Chat(Msg)
+  			functions.Chat(Msg)
   		end
   	end
 end
 function functions.ChatAll(Msg)
     for i, v in pairs(Bots) do
   		if lp.Name == v then
-  			Chat(Msg)
+  			functions.Chat(Msg)
   
   			break
   		end
@@ -49,7 +49,7 @@ function functions.load()
       end
       for i, v in pairs(Bots) do
       	if lp.Name == v then
-      		self.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
+      		functions.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
       
       		break
       	end
