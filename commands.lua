@@ -115,13 +115,21 @@ return function(Msg, functions)
 			User = Players:FindFirstChild(Master)
 		end
 
+		print("###########################")
+      		print("###########################")
+
 		local UserCharacter = User and User.Character
 
 		local NewPath = PathFindingService:CreatePath()
 
+		print("Created New Path")
+
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
+
+				print("###########################")
+      				print("###########################")
 				while (Values.AIFollow and Values.AIFollowTarget) and task.wait(1) do
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
@@ -133,10 +141,12 @@ return function(Msg, functions)
 
 					NewPath:ComputeAsync(HRP.Position, UserHRP.Position)
 
-					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
+					-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
 
-					for _, waypoint in pairs(NewPath:GetWaypoints()) do
-						if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
+					for i, waypoint in pairs(NewPath:GetWaypoints()) do
+						-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
+
+						print("Moving to waypoint "..i)
 						
 						Humanoid:MoveTo(waypoint.Position)
 						Humanoid.MoveToFinished:Wait()
