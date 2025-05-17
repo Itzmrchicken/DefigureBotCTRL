@@ -13,6 +13,8 @@ print(string.format("[%.2f] version.lua", (tick()-load_start)*1000))
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
 
+local Whitelist = getgenv().Data.WhitelistControl
+
 local Bots = getgenv().Data.Bots
 
 local functions = {}
@@ -65,7 +67,7 @@ function functions.load()
       for _, player in pairs(Players:GetPlayers()) do
       	player.Chatted:Connect(function(Message)
       		-- if player.Name ~= Master then return end
-      		if player.Name ~= Master then return end
+      		if player.Name ~= Master or not table.find(Whitelist, player) then return end
       
       		SendCommand(Message, functions)
       	end)
