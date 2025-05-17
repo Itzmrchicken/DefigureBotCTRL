@@ -73,7 +73,7 @@ function functions.load()
       for i, v in pairs(Bots) do
       	if lp.Name == v then
                   if getgenv().Data.ExecuteAnnounce then
-                        functions.Chat("DefigureBotCTRL has loaded "..v.." on version "..tostring(version)..". Use "..Prefix.."cmds to view commands. Load speed "..(string.format("[%.2f] functions.load", (tick()-load_start)*1000)).."ms")
+                        functions.Chat("DefigureBotCTRL has loaded "..v.." on version "..tostring(version)..". Use "..Prefix.."cmds to view commands. Load speed "..(string.format("%.2f", (tick()-load_start)*1000)).."ms")
                   end
       
       		break
