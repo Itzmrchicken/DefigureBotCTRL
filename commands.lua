@@ -128,7 +128,7 @@ return function(Msg, functions)
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-				AIRender = RunService.Heartbeart:Connect(function()
+				AIRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
