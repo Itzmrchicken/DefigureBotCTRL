@@ -55,6 +55,7 @@ local CommandDef = {
 	["gravity"] = "Sets the bots world gravity. USE: gravity {number}",
 	["count"] = "Amount of bots activated",
 	["nm"] = "Bot control permissions (perm transfer, cancelled during re-execution)",
+	["aifollow"] = "Makes the bots walk and avoid objects towards a provided player. USE: aifollow {user}",
 }
 
 return function(Msg, functions)
@@ -183,7 +184,7 @@ return function(Msg, functions)
 	if Cmd == Prefix.."cmds" then
 		functions.BotChat(1, "Listed commands")
 		task.wait(1)
-		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und")
+		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, aifollow")
 	end
 	if Cmd == Prefix.."version" then
 		functions.BotChat(1, "Current version"..tostring(version))
