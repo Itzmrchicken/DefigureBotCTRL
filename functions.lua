@@ -81,6 +81,7 @@ function functions.load()
       end
       
       print("✅Bots Loaded✅")
+      print(string.format("[%.2f] functions.load", (tick()-load_start)*1000))
       print("###########################")
       print("###########################")
 end
