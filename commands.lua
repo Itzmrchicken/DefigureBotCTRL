@@ -486,6 +486,8 @@ return function(Msg, functions)
 		workspace.Gravity = tonumber(Split[2]) or GlobalValues.Gravity
 	end
 	if Cmd == Prefix.."anchor" then
+		functions.BotChat(1, lp.Character.HumanoidRootPart.Anchored and "Unanchoring bots..." or "Anchoring bots...")
+		
 		for _, v in pairs(Bots) do
 			if lp.Name == v then
 				lp.Character.HumanoidRootPart.Anchored = not lp.Character.HumanoidRootPart.Anchored
