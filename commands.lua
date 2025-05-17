@@ -1,6 +1,7 @@
 print("Loading commands...")
 
 local Players = game:GetService("Players")
+local PathFindingService = game:GetService("PathfindingService")
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local lp = Players.LocalPlayer
@@ -11,6 +12,9 @@ local Bots = getgenv().Data.Bots
 local Values = {
 	Follow = false,
 	FollowTarget = nil,
+
+	AIFollow = false,
+	AIFollowTarget = nil,
 
 	Swarm = false,
 	SwarmTarget = nil,
@@ -101,6 +105,43 @@ return function(Msg, functions)
 				end
 
 				break
+			end
+		end
+	end
+	if Cmd == Prefix.."aifollow" then
+		local User = functions.GetPlayer(Split[2])
+
+		if Split[2] == "me" then
+			User = Players:FindFirstChild(Master)
+		end
+
+		local UserCharacter = User and User.Character
+
+		local NewPath = PathFindingService:CreatePath()
+
+		for i, v in pairs(Bots) do
+			if lp.Name == v then
+				print(lp.Name.." has been found")
+				while (Values.AIFollow and Values.AIFollowTarget) and task.wait(1) do
+					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+
+					local Character = lp.Character
+					local HRP = Character and Character.HumanoidRootPart
+					local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+
+					print(UserHRP.Position)
+
+					NewPath:ComputeAsync(HRP.Position, UserHRP.Position)
+
+					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
+
+					for _, waypoint in pairs(NewPath:GetWaypoints()) do
+						if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
+						
+						Humanoid:MoveTo(waypoint.Position)
+						Humanoid.MoveToFinished:Wait()
+					end
+				end
 			end
 		end
 	end
