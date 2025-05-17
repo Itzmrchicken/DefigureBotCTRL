@@ -97,7 +97,7 @@ return function(Msg, functions)
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-				FollowRender = RunService.Heartbeat:Connect(function()
+				Values.FollowRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
@@ -126,21 +126,21 @@ return function(Msg, functions)
 		Values.AIFollowTarget = User
 		Values.AIFollow = Values.AIFollowTarget and true or false
 
+		local NewPath = PathFindingService:CreatePath({
+				AgentRadius = 2,
+				AgentHeight = 5,
+				AgentCanJump = true,
+		})
+
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-				AIRender = RunService.Heartbeat:Connect(function()
+				Values.AIRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
 					local HRP = Character and Character.HumanoidRootPart
 					local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
-
-					local NewPath = PathFindingService:CreatePath({
-							AgentRadius = 2,
-							AgentHeight = 5,
-							AgentCanJump = true,
-					})
 
 					print(UserHRP.Position)
 
@@ -260,7 +260,7 @@ return function(Msg, functions)
 			if lp.Name == v then
 				print(lp.Name.." has been found")
 				workspace.Gravity = 0
-				SwarmRender = RunService.Heartbeat:Connect(function()
+				Values.SwarmRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
@@ -329,7 +329,7 @@ return function(Msg, functions)
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-				LineRender = RunService.Heartbeat:Connect(function()
+				Values.LineRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
@@ -388,7 +388,7 @@ return function(Msg, functions)
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-				DRender = RunService.Heartbeat:Connect(function()
+				Values.DRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
@@ -468,7 +468,7 @@ return function(Msg, functions)
 					end
 				end
 
-				FlingRender = RunService.Heartbeat:Connect(function()
+				Values.FlingRender = RunService.Heartbeat:Connect(function()
 					HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-5, 5))
 
 					if not Values.Fling or not Values.FlingTarget or not UserCharacter then
