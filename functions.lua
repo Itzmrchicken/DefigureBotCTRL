@@ -41,6 +41,18 @@ function functions.ChatAll(Msg)
   	end
 end
 
+function functions.GetPlayer(Username)
+      Username = Username:lower()
+
+      for _, player in pairs(Players:GetPlayers()) do
+            if player.Name:lower():sub(1, #Username) == Username then
+                  return player
+            end
+      end
+
+      return
+end
+
 function functions.load()
       print("###########################")
       print("###########################")
