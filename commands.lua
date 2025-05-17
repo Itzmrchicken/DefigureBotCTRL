@@ -63,7 +63,7 @@ return function(Msg, functions)
 		functions.ChatAll(ChatMsg)
 	end
 	if Cmd == Prefix.."follow" then
-		local User = Players:FindFirstChild(Split[2])
+		local User = functions.GetPlayer(Split[2])
 
 		if Split[2] == "random" then
 			User = Players:GetPlayers()[math.random(1, #Players:GetPlayers())]
@@ -169,7 +169,7 @@ return function(Msg, functions)
 		end
 	end
 	if Cmd == Prefix.."swarm" then
-		local User = Players:FindFirstChild(Split[2])
+		local User = functions.GetPlayer(Split[2])
 
 		if Split[2] == "random" then
 			User = Players:GetPlayers()[math.random(1, #Players:GetPlayers())]
@@ -224,7 +224,7 @@ return function(Msg, functions)
 		end
 	end
 	if Cmd == Prefix.."goto" then
-		local User = Players:FindFirstChild(Split[2])
+		local User = functions.GetPlayer(Split[2])
 
 		if Split[2] == "me" then
 			User = Players:FindFirstChild(Master)
@@ -245,7 +245,7 @@ return function(Msg, functions)
 		end
 	end
 	if Cmd == Prefix.."line" then
-		local User = Players:FindFirstChild(Split[2])
+		local User = functions.GetPlayer(Split[2])
 
 		local Spacing = Split[3] or 3
 
@@ -286,7 +286,7 @@ return function(Msg, functions)
 		functions.ChatAll(DanceType)
 	end
 	if Cmd == Prefix.."nm" then
-		local User = Players:FindFirstChild(Split[2])
+		local User = functions.GetPlayer(Split[2])
 
 		-- if not User then return functions.ChatAll(Split[2], " isn't a valid user") end
 
@@ -306,7 +306,7 @@ return function(Msg, functions)
 		functions.BotChat(1, CmdDef)
 	end
 	if Cmd == Prefix.."d" then
-		local User = Players:FindFirstChild(Split[2])
+		local User = functions.GetPlayer(Split[2])
 
 		if Split[2] == "me" then
 			User = Players:FindFirstChild(Master)
@@ -360,7 +360,7 @@ return function(Msg, functions)
 		functions.BotChat(1, "The current bot count is "..InGame)
 	end
 	if Cmd == Prefix.."fling" then
-		local User = Players:FindFirstChild(Split[2])
+		local User = functions.GetPlayer(Split[2])
 
 		local UserCharacter = User and User.Character
 		local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
