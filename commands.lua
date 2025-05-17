@@ -151,7 +151,7 @@ return function(Msg, functions)
 						Humanoid.MoveToFinished:Wait()
 					end
 
-					task.wait(0.1)
+					Humanoid.MoveToFinished:Wait()
 				end)
 			end
 		end
