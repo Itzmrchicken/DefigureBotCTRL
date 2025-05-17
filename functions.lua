@@ -7,6 +7,8 @@ local lp = Players.LocalPlayer
 
 local SendCommand = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/commands.lua"))()
 print(string.format("[%.2f] commands.lua", (tick()-load_start)*1000))
+local version = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/version.lua"))()
+print(string.format("[%.2f] version.lua", (tick()-load_start)*1000))
 
 local Prefix = getgenv().Data.Prefix
 local Master = getgenv().Data.Master
@@ -71,7 +73,7 @@ function functions.load()
       for i, v in pairs(Bots) do
       	if lp.Name == v then
                   if getgenv().Data.ExecuteAnnounce then
-                        functions.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
+                        functions.Chat("DefigureBotCTRL has loaded "..v.." on version "..tostring(version)..". Use "..Prefix.."cmds to view commands")
                   end
       
       		break
