@@ -58,7 +58,9 @@ function functions.load()
       end
       for i, v in pairs(Bots) do
       	if lp.Name == v then
-                  functions.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
+                  if getgenv().Data.ExecuteAnnounce then
+                        functions.Chat("DefigureBotCTRL has loaded "..v..". Use "..Prefix.."cmds to view commands")
+                  end
       
       		break
       	end
