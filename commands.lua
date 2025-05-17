@@ -142,11 +142,13 @@ return function(Msg, functions)
 					local HRP = Character and Character.HumanoidRootPart
 					local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 
-					print(UserHRP.Position)
+					-- print(UserHRP.Position)
 
 					NewPath:ComputeAsync(HRP.Position, UserHRP.Position)
 
-					for i, waypoint in pairs(NewPath:GetWaypoints()) do						
+					for i, waypoint in pairs(NewPath:GetWaypoints()) do
+						if not Values.AIFollow then return end
+							
 						Humanoid:MoveTo(waypoint.Position)
 						Humanoid.MoveToFinished:Wait()
 					end
