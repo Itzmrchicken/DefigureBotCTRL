@@ -130,6 +130,8 @@ return function(Msg, functions)
 				AgentRadius = 2,
 				AgentHeight = 5,
 				AgentCanJump = true,
+				AgentCanClimb = true,
+				WaypointSpacing = 1,
 		})
 
 		for i, v in pairs(Bots) do
@@ -148,6 +150,10 @@ return function(Msg, functions)
 
 					for i, waypoint in pairs(NewPath:GetWaypoints()) do
 						if not Values.AIFollow then return end
+
+						if waypoint.Action == Enum.PathWaypointAction.Jump then
+							Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+						end
 							
 						Humanoid:MoveTo(waypoint.Position)
 						Humanoid.MoveToFinished:Wait()
