@@ -149,6 +149,8 @@ return function(Msg, functions)
 						Humanoid:MoveTo(waypoint.Position)
 						Humanoid.MoveToFinished:Wait()
 					end
+
+					task.wait(0.1)
 				end)
 			end
 		end
