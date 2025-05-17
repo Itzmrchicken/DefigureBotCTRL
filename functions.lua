@@ -74,13 +74,14 @@ function functions.load()
       	if lp.Name == v then
                   if getgenv().Data.ExecuteAnnounce then
                         functions.Chat("DefigureBotCTRL has loaded "..v.." on version "..tostring(version)..". Use "..Prefix.."cmds to view commands")
+                        task.wait(0.25)
                         functions.Chat(string.format("[%.2f] bot.isloaded", (tick()-load_start)*1000))
                   end
       
       		break
       	end
       
-      	task.wait()
+      	task.wait(0.5)
       end
       
       print("✅Bots Loaded✅")
