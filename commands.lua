@@ -105,7 +105,7 @@ return function(Msg, functions)
 	
 					print(UserHRP.Position)
 	
-					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Follow = false FollowRender:Disconnect() end
+					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Follow = false FollowRender = nil end
 	
 					Humanoid:MoveTo(UserHRP.Position, UserHRP)
 				end)
@@ -160,26 +160,26 @@ return function(Msg, functions)
 		Values.AIFollow = false
 		Values.AIFollowTarget = nil
 
-		if Values.AIRender.Connected then Values.AIRender:Disconnect() end
+		if Values.AIRender.Connected then Values.AIRender = nil end
 	end
 	if Cmd == Prefix.."unswarm" then
 		Values.Swarm = false
 		Values.SwarmTarget = nil
 
-		if Values.SwarmRender.Connected then Values.SwarmRender:Disconnect() end
+		if Values.SwarmRender.Connected then Values.SwarmRender = nil end
 		workspace.Gravity = GlobalValues.Gravity
 	end
 	if Cmd == Prefix.."und" then
 		Values.D = false
 		Values.DTarget = nil
 
-		if Values.DRender.Connected then Values.DRender:Disconnect() end
+		if Values.DRender.Connected then Values.DRender = nil end
 	end
 	if Cmd == Prefix.."unfollow" then
 		Values.Follow = false
 		Values.FollowTarget = nil
 
-		if Values.FollowRender.Connected then Values.FollowRender:Disconnect() end
+		if Values.FollowRender.Connected then Values.FollowRender = nil end
 	end
 	if Cmd == Prefix.."cmds" then
 		functions.BotChat(1, "Listed commands")
@@ -268,7 +268,7 @@ return function(Msg, functions)
 
 					print(UserHRP.Position)
 
-					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Swarm = false workspace.Gravity = GlobalValues.Gravity SwarmRender:Disconnect() end
+					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Swarm = false workspace.Gravity = GlobalValues.Gravity SwarmRender = nil end
 
 					HRP.CFrame = UserHRP.CFrame * CFrame.new(math.random(-10, 10), math.random(-10, 10), math.random(-10, 10))
 				end)
@@ -337,7 +337,7 @@ return function(Msg, functions)
 
 					print(UserHRP.Position)
 
-					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Line = false LineRender:Disconnect() end
+					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Line = false LineRender = nil end
 
 					local Offset = UserHRP.CFrame.LookVector * (Spacing * table.find(Bots, lp.Name))
 					HRP.CFrame = UserHRP.CFrame + Offset
@@ -396,7 +396,7 @@ return function(Msg, functions)
 
 					print(UserHRP.Position)
 
-					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.D = false DRender:Disconnect() end
+					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.D = false DRender = nil end
 
 					local Offset = UserHRP.CFrame.LookVector * (3 * table.find(Bots, lp.Name))
 					HRP.CFrame = UserHRP.CFrame * CFrame.new(0, -1, 0) * CFrame.Angles(-math.rad(90), 0, 0) + Offset
