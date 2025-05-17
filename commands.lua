@@ -484,4 +484,11 @@ return function(Msg, functions)
 	if Cmd == Prefix.."gravity" then
 		workspace.Gravity = tonumber(Split[2]) or GlobalValues.Gravity
 	end
+	if Cmd == Prefix.."anchor" then
+		for _, v in pairs(Bots) do
+			if lp.Name == v then
+				lp.Character.HumanoidRootPart.Anchored = not lp.Character.HumanoidRootPart.Anchored
+			end
+		end
+	end
 end
