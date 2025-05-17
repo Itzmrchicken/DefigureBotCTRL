@@ -1,6 +1,7 @@
 print("Loading commands...")
 
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 local PathFindingService = game:GetService("PathfindingService")
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -12,23 +13,29 @@ local Bots = getgenv().Data.Bots
 local Values = {
 	Follow = false,
 	FollowTarget = nil,
+	FollowRender = nil,
 
 	AIFollow = false,
 	AIFollowTarget = nil,
+	AIFollowRender = nil,
 
 	Swarm = false,
 	SwarmTarget = nil,
+	SwarmRender = nil,
 
 	Line = false,
 	LineTarget = nil,
+	LineRender = nil,
 
 	D = false,
 	DTarget = nil,
+	DRender = nil,
 
 	Fling = false,
 	FlingTarget = nil,
 	SpinINST = nil,
-	FlingVelINST = nil
+	FlingVelINST = nil,
+	FlingRender = nil
 }
 local GlobalValues = {
 	Gravity = workspace.Gravity
@@ -50,11 +57,9 @@ local CommandDef = {
 	["nm"] = "Bot control permissions (perm transfer, cancelled during re-execution)",
 }
 
-local Prefix = getgenv().Data.Prefix
-local Master = getgenv().Data.Master
-
 return function(Msg, functions)
-	Master = getgenv().Data.Master
+	local Prefix = getgenv().Data.Prefix
+	local Master = getgenv().Data.Master
 	
 	local Split = Msg:split(" ")
 	local Cmd = Split[1]:lower()
@@ -115,42 +120,32 @@ return function(Msg, functions)
 			User = Players:FindFirstChild(Master)
 		end
 
-		print("###########################")
-      		print("###########################")
-
 		local UserCharacter = User and User.Character
 
 		Values.AIFollowTarget = User
 		Values.AIFollow = Values.AIFollowTarget and true or false
 
-		local NewPath = PathFindingService:CreatePath()
-
-		print("Created New Path")
-
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-
-				print("###########################")
-      				print("###########################")
-				while (Values.AIFollow and Values.AIFollowTarget) and task.wait(1) do
+				AIRender = RunService.Heartbeart:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
 					local HRP = Character and Character.HumanoidRootPart
 					local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 
+					local NewPath = PathFindingService:CreatePath({
+							AgentRadius = 2,
+							AgentHeight = 5,
+							AgentCanJump = true,
+					})
+
 					print(UserHRP.Position)
 
 					NewPath:ComputeAsync(HRP.Position, UserHRP.Position)
 
-					-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
-
-					for i, waypoint in pairs(NewPath:GetWaypoints()) do
-						-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.AIFollow = false break end
-
-						print("Moving to waypoint "..i)
-						
+					for i, waypoint in pairs(NewPath:GetWaypoints()) do						
 						Humanoid:MoveTo(waypoint.Position)
 						Humanoid.MoveToFinished:Wait()
 					end
@@ -181,20 +176,24 @@ return function(Msg, functions)
 		functions.BotChat(1, "Current version"..tostring(version))
 	end
 	if Cmd == Prefix.."whitelist" then
+		local Whitelist = getgenv().Data.Whitelist
+			
 		if not Players:FindFirstChild(Split[2]) then
 			functions.BotChat(1, "Invalid user, make sure it's the full username and not display name")
 			return
 		end
 		
-		if table.find(getgenv().Data.Whitelist, Split[2]) then
+		if table.find(Whitelist, Split[2]) then
 			functions.BotChat(1, "Removing "..Split[2].." from the whitelist")
 
-			table.remove(getgenv().Data.Whitelist, Split[2])
+			table.remove(Whitelist, Split[2])
 		else
 			functions.BotChat(1, "Adding "..Split[2].." to the whitelist")
 
-			table.insert(getgenv().Data.Whitelist, Split[2])
+			table.insert(Whitelist, Split[2])
 		end
+
+		getgenv().Data.Whitelist = Whitelist
 	end
 	if Cmd == Prefix.."reset" then
 		functions.ChatAll("Resetting...")
@@ -247,7 +246,7 @@ return function(Msg, functions)
 			if lp.Name == v then
 				print(lp.Name.." has been found")
 				workspace.Gravity = 0
-				while (Values.Swarm and Values.SwarmTarget) and task.wait() do
+				SwarmRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
@@ -316,7 +315,7 @@ return function(Msg, functions)
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-				while (Values.Line and Values.LineTarget) and task.wait() do
+				LineRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
@@ -375,7 +374,7 @@ return function(Msg, functions)
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				print(lp.Name.." has been found")
-				while (Values.D and Values.DTarget) and task.wait() do
+				DRender = RunService.Heartbeat:Connect(function()
 					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 					local Character = lp.Character
@@ -455,7 +454,7 @@ return function(Msg, functions)
 					end
 				end
 
-				while (Values.Fling and Values.FlingTarget) and task.wait() do
+				FlingRender = RunService.Heartbeat:Connect(function()
 					HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-5, 5))
 
 					if not Values.Fling or not Values.FlingTarget or not UserCharacter then
