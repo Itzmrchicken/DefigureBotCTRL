@@ -65,7 +65,7 @@ function functions.load()
       for _, player in pairs(Players:GetPlayers()) do
       	player.Chatted:Connect(function(Message)
       		-- if player.Name ~= Master then return end
-      		if player.Name ~= Master and not table.find(Bots, player.Name) then return end
+      		if player.Name ~= Master then return end
       
       		SendCommand(Message, functions)
       	end)
