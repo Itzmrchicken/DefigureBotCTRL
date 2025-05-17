@@ -67,7 +67,7 @@ function functions.load()
       for _, player in pairs(Players:GetPlayers()) do
       	player.Chatted:Connect(function(Message)
       		-- if player.Name ~= Master then return end
-      		if player.Name ~= Master or not table.find(Whitelist, player) then return end
+      		if player.Name ~= Master or not (table.find(Whitelist, player) and player.Name ~= Master) then return end
       
       		SendCommand(Message, functions)
       	end)
