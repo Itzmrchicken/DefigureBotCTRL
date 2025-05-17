@@ -210,6 +210,8 @@ return function(Msg, functions)
 		end
 
 		getgenv().Data.WhitelistControl = Whitelist
+
+		functions.BotChat(1, "!clear")
 	end
 	if Cmd == Prefix.."reset" then
 		functions.ChatAll("Resetting...")
