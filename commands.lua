@@ -176,7 +176,7 @@ return function(Msg, functions)
 		functions.BotChat(1, "Current version"..tostring(version))
 	end
 	if Cmd == Prefix.."whitelist" then
-		local Whitelist = getgenv().Data.Whitelist
+		local Whitelist = getgenv().Data.WhitelistControl
 			
 		if not Players:FindFirstChild(Split[2]) then
 			functions.BotChat(1, "Invalid user, make sure it's the full username and not display name")
@@ -193,7 +193,7 @@ return function(Msg, functions)
 			table.insert(Whitelist, Split[2])
 		end
 
-		getgenv().Data.Whitelist = Whitelist
+		getgenv().Data.WhitelistControl = Whitelist
 	end
 	if Cmd == Prefix.."reset" then
 		functions.ChatAll("Resetting...")
