@@ -97,16 +97,18 @@ return function(Msg, functions)
 			if lp.Name == v then
 				print(lp.Name.." has been found")
 				while (Values.Follow and Values.FollowTarget) and task.wait(1) do
-					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+					FollowRender = RunService.Heartbeat:Connect(function()
+						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
-					local Character = lp.Character
-					local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
-
-					print(UserHRP.Position)
-
-					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Follow = false break end
-
-					Humanoid:MoveTo(UserHRP.Position, UserHRP)
+						local Character = lp.Character
+						local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+	
+						print(UserHRP.Position)
+	
+						if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Follow = false break end
+	
+						Humanoid:MoveTo(UserHRP.Position, UserHRP)
+					end)
 				end
 
 				break
@@ -149,7 +151,7 @@ return function(Msg, functions)
 						Humanoid:MoveTo(waypoint.Position)
 						Humanoid.MoveToFinished:Wait()
 					end
-				end
+				end)
 			end
 		end
 	end
@@ -257,7 +259,7 @@ return function(Msg, functions)
 					if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Swarm = false workspace.Gravity = GlobalValues.Gravity break end
 
 					HRP.CFrame = UserHRP.CFrame * CFrame.new(math.random(-10, 10), math.random(-10, 10), math.random(-10, 10))
-				end
+				end)
 
 				break
 			end
@@ -327,7 +329,7 @@ return function(Msg, functions)
 
 					local Offset = UserHRP.CFrame.LookVector * (Spacing * table.find(Bots, lp.Name))
 					HRP.CFrame = UserHRP.CFrame + Offset
-				end
+				end)
 
 				break
 			end
@@ -386,7 +388,7 @@ return function(Msg, functions)
 
 					local Offset = UserHRP.CFrame.LookVector * (3 * table.find(Bots, lp.Name))
 					HRP.CFrame = UserHRP.CFrame * CFrame.new(0, -1, 0) * CFrame.Angles(-math.rad(90), 0, 0) + Offset
-				end
+				end)
 
 				break
 			end
@@ -464,7 +466,7 @@ return function(Msg, functions)
 						Spin:Destroy()
 						-- FlingVal:Destroy()
 					end
-				end
+				end)
 			end
 		end
 	end
