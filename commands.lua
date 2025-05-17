@@ -120,6 +120,9 @@ return function(Msg, functions)
 
 		local UserCharacter = User and User.Character
 
+		Values.AIFollowTarget = User
+		Values.AIFollow = Values.AIFollowTarget and true or false
+
 		local NewPath = PathFindingService:CreatePath()
 
 		print("Created New Path")
