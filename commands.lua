@@ -160,26 +160,26 @@ return function(Msg, functions)
 		Values.AIFollow = false
 		Values.AIFollowTarget = nil
 
-		if Values.AIRender.Connected then Values.AIRender = nil end
+		Values.AIRender = nil
 	end
 	if Cmd == Prefix.."unswarm" then
 		Values.Swarm = false
 		Values.SwarmTarget = nil
 
-		if Values.SwarmRender.Connected then Values.SwarmRender = nil end
+		Values.SwarmRender = nil
 		workspace.Gravity = GlobalValues.Gravity
 	end
 	if Cmd == Prefix.."und" then
 		Values.D = false
 		Values.DTarget = nil
 
-		if Values.DRender.Connected then Values.DRender = nil end
+		Values.DRender = nil
 	end
 	if Cmd == Prefix.."unfollow" then
 		Values.Follow = false
 		Values.FollowTarget = nil
 
-		if Values.FollowRender.Connected then Values.FollowRender = nil end
+		Values.FollowRender = nil
 	end
 	if Cmd == Prefix.."cmds" then
 		functions.BotChat(1, "Listed commands")
