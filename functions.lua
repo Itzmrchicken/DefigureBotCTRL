@@ -77,6 +77,15 @@ function functions.load()
                         task.wait(0.25)
                         functions.Chat(string.format("[%.2f] bot.isloaded", (tick()-load_start)*1000))
                   end
+                  if getgenv().Data.BotCollisions then
+                        lp.CharacterAdded:Connect(function(char)
+                              for _, v in pairs(char:GetChildren()) do
+                                    if v:IsA("BasePart") then
+                                          v.CanCollide = false
+                                    end
+                              end
+                        end)
+                  end
       
       		break
       	end
