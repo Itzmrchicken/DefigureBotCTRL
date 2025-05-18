@@ -315,7 +315,7 @@ return function(Msg, functions)
 						local Character = lp.Character
 						local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
 	
-						if not Values.Swarm then return end
+						if not Values.Swarm or UserCharacter.Humanoid.Health <= 0 then return end
 	
 						print(UserHRP.Position)
 	
@@ -357,6 +357,8 @@ return function(Msg, functions)
 				local Character = lp.Character
 				local HRP = Character and Character.HumanoidRootPart
 
+				if not HRP then return functions.BotChat(1, "This user doesn't exist or an error occured") end
+
 				HRP.CFrame = UserHRP.CFrame
 
 				break
@@ -388,7 +390,7 @@ return function(Msg, functions)
 						local Character = lp.Character
 						local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
 	
-						if not Values.Line then return end
+						if not Values.Line or UserCharacter.Humanoid.Health <= 0 then return end
 	
 						print(UserHRP.Position)
 	
@@ -450,7 +452,7 @@ return function(Msg, functions)
 						local Character = lp.Character
 						local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
 	
-						if not Values.D then return end
+						if not Values.D or UserCharacter.Humanoid.Health <= 0 then return end
 	
 						print(UserHRP.Position)
 	
@@ -531,7 +533,7 @@ return function(Msg, functions)
 					Values.FlingRender = RunService.Heartbeat:Connect(function()
 						HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-5, 5))
 	
-						if not Values.Fling or not Values.FlingTarget or not UserCharacter then
+						if not Values.Fling or not Values.FlingTarget or UserCharacter.Humanoid.Health <= 0 then
 							workspace.Gravity = GlobalValues.Gravity
 							Values.Fling = false
 							Values.FlingTarget = nil
