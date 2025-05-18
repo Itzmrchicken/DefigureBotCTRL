@@ -67,6 +67,8 @@ function functions.load()
       for _, player in pairs(Players:GetPlayers()) do
       	if player.Name == Master or table.find(Whitelist, player.Name) then
                   player.Chatted:Connect(function(Message)
+                        Whitelist = getgenv().Data.WhitelistControl
+                              
                         if player.Name == Master or table.find(Whitelist, player.Name) then
                               SendCommand(Message, functions)
                         end
@@ -75,6 +77,8 @@ function functions.load()
       end
       Players.PlayerAdded:Connect(function(player)
             player.Chatted:Connect(function(Message)
+                  Whitelist = getgenv().Data.WhitelistControl
+                              
                   if player.Name == Master or table.find(Whitelist, player.Name) then
                         SendCommand(Message, functions)
                   end
