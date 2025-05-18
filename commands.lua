@@ -226,6 +226,9 @@ return function(Msg, functions)
 
 		getgenv().Data.WhitelistControl = Whitelist
 
+		functions.BotChat(1, Split[2].." you now have permissions to use commands! Do "..Prefix.."cmds to view commands!")
+
+		task.wait(1)
 		functions.BotChat(1, "!clear")
 	end
 	if Cmd == Prefix.."reset" then
