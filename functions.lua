@@ -67,13 +67,19 @@ function functions.load()
       for _, player in pairs(Players:GetPlayers()) do
       	if player.Name == Master or table.find(Whitelist, player.Name) then
                   player.Chatted:Connect(function(Message)
-            		-- if player.Name ~= Master then return end
-            		-- if player.Name ~= Master or (player.Name ~= Master and not table.find(Whitelist, player)) then return end
-            
-            		SendCommand(Message, functions)
-            	end)
+                        if player.Name == Master or table.find(Whitelist, player.Name) then
+                              SendCommand(Message, functions)
+                        end
+                  end)
             end
       end
+      Players.PlayerAdded:Connect(function(player)
+            player.Chatted:Connect(function(Message)
+                  if player.Name == Master or table.find(Whitelist, player.Name) then
+                        SendCommand(Message, functions)
+                  end
+            end)
+      end)
       for i, v in pairs(Bots) do
       	if lp.Name == v then
                   if getgenv().Data.ExecuteAnnounce then
