@@ -78,6 +78,8 @@ function functions.load()
                         SendCommand(Message, functions)
                   end
             end)
+
+            task.wait()
       end
       Players.PlayerAdded:Connect(function(player)
             player.Chatted:Connect(function(Message)
