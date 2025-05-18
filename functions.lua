@@ -80,6 +80,12 @@ function functions.load()
                         functions.Chat(string.format("[%.2f] bot.isloaded", (tick()-load_start)*1000))
                   end
                   if getgenv().Data.BotCollisions then
+                        for _, v in pairs(lp.Character:GetChildren()) do
+                              if v:IsA("BasePart") then
+                                    v.CanCollide = false
+                              end
+                        end
+                        
                         lp.CharacterAdded:Connect(function(char)
                               for _, v in pairs(char:GetChildren()) do
                                     if v:IsA("BasePart") then
@@ -88,6 +94,8 @@ function functions.load()
                               end
                         end)
                   end
+
+                  UserSettings():GetService("UserGameSettings").MasterVolume = 0
       
       		break
       	end
