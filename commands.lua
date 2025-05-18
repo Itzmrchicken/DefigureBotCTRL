@@ -58,7 +58,9 @@ local CommandDef = {
 	["aifollow"] = "Makes the bots walk and avoid objects towards a provided player. USE: aifollow {user}",
 	["sreset"] = "Silently resets the bots",
 	["executor"] = "Shows what executor injector is using",
-	["version"] = "Script version"
+	["version"] = "Script version",
+	["fling"] = "Makes the provided user not exist anymore. USE: fling {user}",
+	["promote"] = "Promotes the script to others"
 }
 
 return function(Msg, functions)
