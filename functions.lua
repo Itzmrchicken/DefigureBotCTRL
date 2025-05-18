@@ -73,8 +73,6 @@ function functions.load()
       for _, player in pairs(Players:GetPlayers()) do
       	player.Chatted:Connect(function(Message)
                   Whitelist = getgenv().Data.WhitelistControl
-
-                  print(table.find(Whitelist, player.Name))
                               
                   if player.Name == Master or table.find(Whitelist, player.Name) then
                         SendCommand(Message, functions)
