@@ -203,7 +203,7 @@ return function(Msg, functions)
 		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor")
 	end
 	if Cmd == Prefix.."version" then
-		functions.BotChat(1, "Current version"..tostring(version))
+		functions.BotChat(1, "Current version is "..tostring(version))
 	end
 	if Cmd == Prefix.."whitelist" then
 		local Whitelist = getgenv().Data.WhitelistControl
