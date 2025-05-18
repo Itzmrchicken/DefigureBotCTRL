@@ -215,18 +215,21 @@ return function(Msg, functions)
 		end
 		
 		if table.find(Whitelist, Split[2]) then
-			functions.BotChat(1, "Removing "..Split[2].." from the whitelist")
+			functions.BotChat(1, "Removing "..Split[2].." from the whitelist...")
 
 			table.remove(Whitelist, table.find(Whitelist, Split[2]))
+				
+			functions.BotChat(1, Split[2].." your permissions have been revoked!")
 		else
-			functions.BotChat(1, "Adding "..Split[2].." to the whitelist")
+			functions.BotChat(1, "Adding "..Split[2].." to the whitelist...")
 
 			table.insert(Whitelist, Split[2])
+
+			
+			functions.BotChat(1, Split[2].." you now have permissions to use commands! Do "..Prefix.."cmds to view commands!")
 		end
 
 		-- getgenv().Data.WhitelistControl = Whitelist
-
-		functions.BotChat(1, Split[2].." you now have permissions to use commands! Do "..Prefix.."cmds to view commands!")
 
 		task.wait(1)
 		functions.BotChat(1, "!clear")
