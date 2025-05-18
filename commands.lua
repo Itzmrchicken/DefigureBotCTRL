@@ -151,7 +151,7 @@ return function(Msg, functions)
 				AgentHeight = 5,
 				AgentCanJump = true,
 				AgentCanClimb = true,
-				WaypointSpacing = 1,
+				-- WaypointSpacing = 1,
 		})
 
 		for i, v in pairs(Bots) do
