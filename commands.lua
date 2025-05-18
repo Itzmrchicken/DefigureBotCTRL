@@ -239,7 +239,9 @@ return function(Msg, functions)
 		functions.BotChat(1, "chat, count, antiafk, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor, version, fling, whitelist")
 	end
 	if Cmd == Prefix.."version" then
-		functions.BotChat(1, "Current version is "..tostring(version))
+		local liveversion = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/version.lua"))()
+		
+		functions.BotChat(1, "Current version is "..tostring(version)..". This version is "..(version == liveversion and "up to date" or "outdated"))
 	end
 	if Cmd == Prefix.."whitelist" then
 		local Whitelist = getgenv().Data.WhitelistControl
