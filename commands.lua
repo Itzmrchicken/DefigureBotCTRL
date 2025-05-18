@@ -64,7 +64,8 @@ local CommandDef = {
 	["executor"] = "Shows what executor injector is using",
 	["version"] = "Script version",
 	["fling"] = "Makes the provided user not exist anymore. USE: fling {user}",
-	["promote"] = "Promotes the script to others"
+	["promote"] = "Promotes the script to others",
+	["antiafk"] = "Bots don't get disconnected for idling"
 }
 
 return function(Msg, functions)
@@ -235,7 +236,7 @@ return function(Msg, functions)
 	if Cmd == Prefix.."cmds" then
 		functions.BotChat(1, "Listed commands")
 		task.wait(1)
-		functions.BotChat(1, "chat, count, , follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor, version, fling, whitelist")
+		functions.BotChat(1, "chat, count, antiafk, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor, version, fling, whitelist")
 	end
 	if Cmd == Prefix.."version" then
 		functions.BotChat(1, "Current version is "..tostring(version))
