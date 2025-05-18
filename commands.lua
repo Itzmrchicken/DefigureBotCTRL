@@ -192,7 +192,7 @@ return function(Msg, functions)
 	if Cmd == Prefix.."cmds" then
 		functions.BotChat(1, "Listed commands")
 		task.wait(1)
-		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, aifollow")
+		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset")
 	end
 	if Cmd == Prefix.."version" then
 		functions.BotChat(1, "Current version"..tostring(version))
@@ -222,6 +222,15 @@ return function(Msg, functions)
 	if Cmd == Prefix.."reset" then
 		functions.ChatAll("Resetting...")
 
+		for i, v in pairs(Bots) do
+			if lp.Name == v then
+				lp.Character.Humanoid.Health = 0
+
+				break
+			end
+		end
+	end
+	if Cmd == Prefix.."sreset" then
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				lp.Character.Humanoid.Health = 0
