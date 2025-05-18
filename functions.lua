@@ -114,6 +114,7 @@ function functions.load()
                   end
 
                   UserSettings():GetService("UserGameSettings").MasterVolume = 0
+                  setfpscap(15)
       
       		break
       	end
