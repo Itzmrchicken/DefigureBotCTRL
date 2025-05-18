@@ -112,6 +112,7 @@ return function(Msg, functions)
 				print(lp.Name.." has been found")
 				task.spawn(function()
 					Values.FollowRender = RunService.Heartbeat:Connect(function()
+						UserCharacter = User and User.Character
 						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 	
 						local Character = lp.Character
