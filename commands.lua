@@ -217,7 +217,7 @@ return function(Msg, functions)
 		if table.find(Whitelist, Split[2]) then
 			functions.BotChat(1, "Removing "..Split[2].." from the whitelist")
 
-			table.remove(Whitelist, Split[2])
+			table.remove(Whitelist, table.find(Whitelist, Split[2]))
 		else
 			functions.BotChat(1, "Adding "..Split[2].." to the whitelist")
 
