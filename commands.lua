@@ -174,8 +174,8 @@ return function(Msg, functions)
 							Humanoid:MoveTo(waypoint.Position)
 							Humanoid.MoveToFinished:Wait()
 						end
-	
-						Humanoid.MoveToFinished:Wait()
+
+						task.wait(2.5)
 					end)
 				end)
 
@@ -211,7 +211,7 @@ return function(Msg, functions)
 	if Cmd == Prefix.."cmds" then
 		functions.BotChat(1, "Listed commands")
 		task.wait(1)
-		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor, version, fling, whitelist")
+		functions.BotChat(1, "chat, count, , follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor, version, fling, whitelist")
 	end
 	if Cmd == Prefix.."version" then
 		functions.BotChat(1, "Current version is "..tostring(version))
@@ -548,7 +548,7 @@ return function(Msg, functions)
 		end
 	end
 	if Cmd == Prefix.."gravity" then
-		workspace.Gravity = tonumber(Split[2]) or GlobalValues.Gravity
+		if table.find(Bots, lp.Name) then workspace.Gravity = tonumber(Split[2]) or GlobalValues.Gravity end
 	end
 	if Cmd == Prefix.."anchor" then
 		functions.BotChat(1, lp.Character.HumanoidRootPart.Anchored and "Unanchoring bots..." or "Anchoring bots...")
