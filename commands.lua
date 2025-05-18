@@ -56,6 +56,8 @@ local CommandDef = {
 	["count"] = "Amount of bots activated",
 	["nm"] = "Bot control permissions (perm transfer, cancelled during re-execution)",
 	["aifollow"] = "Makes the bots walk and avoid objects towards a provided player. USE: aifollow {user}",
+	["sreset"] = "Silently resets the bots",
+	["executor"] = "Shows what executor injector is using"
 }
 
 return function(Msg, functions)
@@ -113,6 +115,9 @@ return function(Msg, functions)
 				break
 			end
 		end
+	end
+	if Cmd == Prefix.."executor" then
+		functions.BotChat(1, "Injected user is using "..tostring(identifyexecutor()))
 	end
 	if Cmd == Prefix.."aifollow" then
 		local User = functions.GetPlayer(Split[2])
@@ -192,7 +197,7 @@ return function(Msg, functions)
 	if Cmd == Prefix.."cmds" then
 		functions.BotChat(1, "Listed commands")
 		task.wait(1)
-		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset")
+		functions.BotChat(1, "chat, count, gravity, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor")
 	end
 	if Cmd == Prefix.."version" then
 		functions.BotChat(1, "Current version"..tostring(version))
