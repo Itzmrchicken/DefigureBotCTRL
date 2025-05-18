@@ -32,7 +32,11 @@ function functions.BotChat(Username, Msg)
   	for i, v in pairs(Bots) do
   		if Index == i and lp.Name == v then
   			functions.Chat(Msg)
+
+                  return
   		end
+
+            task.wait()
   	end
 end
 function functions.ChatAll(Msg)
@@ -42,6 +46,8 @@ function functions.ChatAll(Msg)
   
   			break
   		end
+
+            task.wait()
   	end
 end
 
@@ -65,17 +71,15 @@ function functions.load()
       task.wait(1)
       
       for _, player in pairs(Players:GetPlayers()) do
-      	if player.Name == Master or table.find(Whitelist, player.Name) then
-                  player.Chatted:Connect(function(Message)
-                        Whitelist = getgenv().Data.WhitelistControl
+      	player.Chatted:Connect(function(Message)
+                  Whitelist = getgenv().Data.WhitelistControl
 
-                        print(table.find(Whitelist, player.Name))
+                  print(table.find(Whitelist, player.Name))
                               
-                        if player.Name == Master or table.find(Whitelist, player.Name) then
-                              SendCommand(Message, functions)
-                        end
-                  end)
-            end
+                  if player.Name == Master or table.find(Whitelist, player.Name) then
+                        SendCommand(Message, functions)
+                  end
+            end)
       end
       Players.PlayerAdded:Connect(function(player)
             player.Chatted:Connect(function(Message)
