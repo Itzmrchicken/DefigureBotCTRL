@@ -208,25 +208,27 @@ return function(Msg, functions)
 	end
 	if Cmd == Prefix.."whitelist" then
 		local Whitelist = getgenv().Data.WhitelistControl
+
+		local User = functions.GetPlayer(Split[2])
 			
-		if not Players:FindFirstChild(Split[2]) then
+		if not User then
 			functions.BotChat(1, "Invalid user, make sure it's the full username and not display name")
 			return
 		end
 		
-		if table.find(Whitelist, Split[2]) then
-			functions.BotChat(1, "Removing "..Split[2].." from the whitelist...")
+		if table.find(Whitelist, User.Name) then
+			functions.BotChat(1, "Removing "..User.Name.." from the whitelist...")
 
-			table.remove(Whitelist, table.find(Whitelist, Split[2]))
+			table.remove(Whitelist, table.find(Whitelist, User.Name))
 				
-			functions.BotChat(1, Split[2].." your permissions have been revoked!")
+			functions.BotChat(1, User.Name.." your permissions have been revoked!")
 		else
-			functions.BotChat(1, "Adding "..Split[2].." to the whitelist...")
+			functions.BotChat(1, "Adding "..User.Name.." to the whitelist...")
 
-			table.insert(Whitelist, Split[2])
+			table.insert(Whitelist, User.Name)
 
 			
-			functions.BotChat(1, Split[2].." you now have permissions to use commands! Do "..Prefix.."cmds to view commands!")
+			functions.BotChat(1, User.Name.." you now have permissions to use commands! Do "..Prefix.."cmds to view commands!")
 		end
 
 		-- getgenv().Data.WhitelistControl = Whitelist
