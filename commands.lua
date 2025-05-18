@@ -224,7 +224,7 @@ return function(Msg, functions)
 			table.insert(Whitelist, Split[2])
 		end
 
-		getgenv().Data.WhitelistControl = Whitelist
+		-- getgenv().Data.WhitelistControl = Whitelist
 
 		functions.BotChat(1, Split[2].." you now have permissions to use commands! Do "..Prefix.."cmds to view commands!")
 
@@ -391,7 +391,6 @@ return function(Msg, functions)
 		functions.BotChat(1, "Changing masters...")
 		
 		Master = User.Name
-		getgenv().Data.Master = Master
 
 		functions.BotChat(1, Master.." is the new master, do .cmds to view commands")
 		functions.BotChat(1, "!clear")
