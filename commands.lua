@@ -2,6 +2,7 @@ print("Loading commands...")
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
+local VirtualUser = game:GetService("VirtualUser")
 local PathFindingService = game:GetService("PathfindingService")
 local TextChatService = game:GetService("TextChatService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -30,6 +31,9 @@ local Values = {
 	D = false,
 	DTarget = nil,
 	DRender = nil,
+
+	AntiAfk = false,
+	AntiAfkRender = nil,
 
 	Fling = false,
 	FlingTarget = nil,
@@ -188,6 +192,26 @@ return function(Msg, functions)
 		Values.AIFollowTarget = nil
 
 		Values.AIRender = nil
+	end
+	if Cmd == Prefix.."antiafk" then
+		Values.AntiAfk = not Values.AntiAfk
+
+		if Values.AntiAfk then
+			for _, v in pairs(Bots) do
+				if lp.Name == v then
+					Values.AntiAfkRender = lp.Idled:Connect(function()
+						VirtualUser:CaptureController()
+						VirtualUser:ClickButton2(Vector2.new())
+					end)
+					
+					break
+				end
+			end
+		else
+			Values.AntiAfkRender = nil
+		end
+
+		functions.BotChat(1, Values.AntiAfk and "Anti-AFK enabled" or "Anti-AFK disable")
 	end
 	if Cmd == Prefix.."unswarm" then
 		Values.Swarm = false
