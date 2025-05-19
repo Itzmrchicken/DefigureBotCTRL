@@ -154,14 +154,12 @@ return function(Msg, functions)
 				
 				task.spawn(function()
 					Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
-						if not Values.Orbit then return end
-
 						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 						local Character = lp.Character
 						local HRP = Character and Character.HumanoidRootPart
 
-						if UserHRP or Character.Humanoid.Health <= 0 then Values.Orbit = false workspace.Gravity = GlobalValues.Gravity return end
+						if Values.Orbit = false then Values.Orbit = false workspace.Gravity = GlobalValues.Gravity return end
 
 						Angle = Angle + Speed * DeltaTime
 
@@ -169,6 +167,8 @@ return function(Msg, functions)
 						HRP.CFrame = CFrame.new(UserHRP.Position + Offset, UserHRP.Position)
 					end)
 				end)
+
+				break
 			end
 		end
 	end
