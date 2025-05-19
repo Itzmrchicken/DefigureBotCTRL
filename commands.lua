@@ -145,8 +145,8 @@ return function(Msg, functions)
 		local User = functions.GetPlayer(Split[2])
 		local UserCharacter = User and User.Character
 
-		local Speed = tonumber(Split[3]) or 1
-		local Radius = tonumber(Split[4]) or 10
+		local Speed = Split[3] or 1
+		local Radius = Split[4] or 10
 		local Spacing = Radius / 2
 		
 		local Rot = 0
