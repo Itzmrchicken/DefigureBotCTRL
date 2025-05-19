@@ -475,7 +475,7 @@ return function(Msg, functions)
 	if Cmd == Prefix.."line" then
 		local User = functions.GetPlayer(Split[2])
 
-		local Spacing = Split[3] or 3
+		local Spacing = tonumber(Split[3]) or 3
 
 		if Split[2] == "me" then
 			User = Players:FindFirstChild(Master)
