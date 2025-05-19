@@ -154,6 +154,7 @@ return function(Msg, functions)
 
 		local CurrentIndex = 0
 
+		Values.OrbitTarget = User
 		Values.Orbit = Values.OrbitTarget and true or false
 
 		for _, v in pairs(Bots) do
