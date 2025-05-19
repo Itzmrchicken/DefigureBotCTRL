@@ -157,11 +157,11 @@ return function(Msg, functions)
 		Values.OrbitTarget = User
 		Values.Orbit = Values.OrbitTarget and true or false
 
-		for _, v in pairs(Bots) do
+		for i, v in pairs(Bots) do
 			if lp.Name == v then
 				workspace.Gravity = 0
 
-				CurrentIndex += 1
+				CurrentIndex = i
 				
 				task.spawn(function()
 					Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
@@ -175,7 +175,7 @@ return function(Msg, functions)
 						Rot = Rot + DeltaTime * RotSpeed
 
 						local Angle = Rot - (CurrentIndex * Spacing)
-						local X, Z = math.sin(Angle) * Radius, math.cos(angle) * Radius
+						local X, Z = math.sin(Angle) * Radius, math.cos(Angle) * Radius
 
 						local NewPos = UserHRP.Position + Vector3.new(X, 0, Z)
 						HRP.CFrame = CFrame.new(NewPos, UserHRP.Position)
