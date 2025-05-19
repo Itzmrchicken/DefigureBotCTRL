@@ -275,15 +275,9 @@ return function(Msg, functions)
 	end
 	if Cmd == Prefix.."cmds" then
 		local Pages = {
-			[1] = {
-				"chat", "count", "antiafk", "follow", "reset", "d", "swarm", "leave", "goto", "line", "dance", "nm"
-			},
-			[2] = {
-				"define", "speed", "sreset", "executor", "version", "fling", "whitelist", "aifollow", "unfollow", "unswarm", "und", "unaifollow"
-			},
-			[3] = {
-				"orbit", "promote", "cmds", "rj", "gravity", "anchor"
-			}
+			[1] = {"chat", "count", "antiafk", "follow", "reset", "d", "swarm", "leave", "goto", "line", "dance", "nm"},
+			[2] = {"define", "speed", "sreset", "executor", "version", "fling", "whitelist", "aifollow", "unfollow", "unswarm", "und", "unaifollow"},
+			[3] = {"orbit", "promote", "cmds", "rj", "gravity", "anchor"}
 		}
 		
 		local TotalPages = #Pages
@@ -292,7 +286,18 @@ return function(Msg, functions)
 		if Pages[Page] then
 			functions.BotChat(1, "Listed Commands for Page "..Page)
 			task.wait(0.75)
-			functions.BotChat(1, Pages[Page])
+
+			local Connected_String = ""
+			
+			for i, command in pairs(Pages[Page]) do
+				if i < #Pages[Page] then
+					Connected_String = Connected_String.." "..command..","
+				else
+					Connected_String = Connected_String.." "..command
+				end
+			end
+
+			functions.BotChat(1, Connected_String)
 		elseif Page > TotalPages then
 			functions.BotChat(1, "The max page number is "..TotalPages)
 		else
