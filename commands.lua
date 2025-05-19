@@ -11,6 +11,9 @@ local lp = Players.LocalPlayer
 local version = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/version.lua"))()
 
 local Bots = getgenv().Data.Bots
+local Prefix = getgenv().Data.Prefix
+local Master = getgenv().Data.Master
+
 local Values = {
 	Follow = false,
 	FollowTarget = nil,
@@ -75,9 +78,6 @@ local CommandDef = {
 }
 
 return function(Msg, functions)
-	local Prefix = getgenv().Data.Prefix
-	local Master = getgenv().Data.Master
-	
 	local Split = Msg:split(" ")
 	local Cmd = Split[1]:lower()
 
