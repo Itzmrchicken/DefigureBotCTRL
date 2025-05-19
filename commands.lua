@@ -638,12 +638,12 @@ return function(Msg, functions)
 
 				task.spawn(function()
 					Values.FlingRender = RunService.Heartbeat:Connect(function()
-						if not UserHRP then
-							workspace.Gravity = GlobalValues.Gravity
-							Values.Fling = false
-							Values.FlingTarget = nil
-							Spin:Destroy()
-						end
+						-- if not UserHRP then
+						-- 	workspace.Gravity = GlobalValues.Gravity
+						-- 	Values.Fling = false
+						-- 	Values.FlingTarget = nil
+						-- 	Spin:Destroy()
+						-- end
 								
 						HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-5, 5))
 	
