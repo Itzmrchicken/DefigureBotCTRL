@@ -147,7 +147,7 @@ return function(Msg, functions)
 
 		local Speed = Split[3] or 1
 		local Radius = Split[4] or 10
-		local Spacing = Radius / 2
+		local Spacing = Radius / #Bots
 		
 		local Rot = 0
 		local RotSpeed = math.pi * 2 / Speed
