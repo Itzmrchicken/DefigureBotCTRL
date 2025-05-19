@@ -287,7 +287,7 @@ return function(Msg, functions)
 		}
 		
 		local TotalPages = #Pages
-		local Page = Split[2] or 1
+		local Page = tonumber(Split[2]) or 1
 
 		if Pages[Page] then
 			functions.BotChat(1, "Listed Commands for Page "..Page)
