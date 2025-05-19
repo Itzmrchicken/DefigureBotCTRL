@@ -147,14 +147,20 @@ return function(Msg, functions)
 
 		local Speed = Split[3] or 1
 		local Radius = Split[4] or 10
+		local Spacing = Radius / 2
 		
-		local Angle = math.random() * math.pi * 2
+		local Rot = 0
+		local RotSpeed = math.pi * 2 / Speed
+
+		local CurrentIndex = 0
 
 		Values.Orbit = Values.OrbitTarget and true or false
 
 		for _, v in pairs(Bots) do
 			if lp.Name == v then
 				workspace.Gravity = 0
+
+				CurrentIndex += 1
 				
 				task.spawn(function()
 					Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
@@ -165,10 +171,13 @@ return function(Msg, functions)
 
 						if Values.Orbit == false then workspace.Gravity = GlobalValues.Gravity return end
 
-						Angle = Angle + Speed * DeltaTime
+						Rot = Rot + DeltaTime * RotSpeed
 
-						local Offset = Vector3.new(math.cos(Angle) * Radius, 0, math.sin(Angle) * Radius)
-						HRP.CFrame = CFrame.new(UserHRP.Position + Offset, UserHRP.Position)
+						local Angle = Rot - (CurrentIndex * Spacing)
+						local X, Z = math.sin(Angle) * Radius, math.cos(angle) * Radius
+
+						local NewPos = UserHRP.Position + Vector3.new(X, 0, Z)
+						HRP.CFrame = CFrame.new(NewPos, UserHRP.Position)
 					end)
 				end)
 
