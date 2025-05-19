@@ -70,7 +70,8 @@ local CommandDef = {
 	["fling"] = "Makes the provided user not exist anymore. USE: fling {user}",
 	["promote"] = "Promotes the script to others",
 	["antiafk"] = "Bots don't get disconnected for idling",
-	["orbit"] = "Makes the bots orbit a provided player. USE: orbit {user} {speed} {distant}"
+	["orbit"] = "Makes the bots orbit a provided player. USE: orbit {user} {speed} {distant}",
+	["prefix"] = "Changes the prefix to run commands"
 }
 
 return function(Msg, functions)
@@ -86,6 +87,9 @@ return function(Msg, functions)
 		local ChatMsg = Msg:gsub(Cmd, "")
 
 		functions.ChatAll(ChatMsg)
+	end
+	if Cmd == Prefix.."prefix" then
+		Prefix = Split[2] or Prefix
 	end
 	if Cmd == Prefix.."promote" then
 		functions.ChatAll("Want the script? Join today, vRQgE5qtUx")
