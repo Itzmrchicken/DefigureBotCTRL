@@ -163,7 +163,7 @@ return function(Msg, functions)
 						local Character = lp.Character
 						local HRP = Character and Character.HumanoidRootPart
 
-						if Values.Orbit =- false then workspace.Gravity = GlobalValues.Gravity return end
+						if Values.Orbit == false then workspace.Gravity = GlobalValues.Gravity return end
 
 						Angle = Angle + Speed * DeltaTime
 
