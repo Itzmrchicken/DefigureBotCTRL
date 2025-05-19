@@ -638,7 +638,7 @@ return function(Msg, functions)
 
 				task.spawn(function()
 					Values.FlingRender = RunService.Heartbeat:Connect(function()
-						if not HRP then
+						if not UserHRP then
 							workspace.Gravity = GlobalValues.Gravity
 							Values.Fling = false
 							Values.FlingTarget = nil
