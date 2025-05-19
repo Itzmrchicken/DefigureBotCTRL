@@ -274,9 +274,30 @@ return function(Msg, functions)
 		Values.FollowRender = nil
 	end
 	if Cmd == Prefix.."cmds" then
-		functions.BotChat(1, "Listed commands")
-		task.wait(1)
-		functions.BotChat(1, "chat, count, antiafk, follow, reset, d, rj, swarm, leave, goto, line, dance, nm, define, speed, unfollow, unswarm, und, unaifollow, aifollow, sreset, executor, version, fling, whitelist")
+		local Pages = {
+			[1] = {
+				"chat", "count", "antiafk", "follow", "reset", "d", "swarm", "leave", "goto", "line", "dance", "nm"
+			},
+			[2] = {
+				"define", "speed", "sreset", "executor", "version", "fling", "whitelist", "aifollow", "unfollow", "unswarm", "und", "unaifollow"
+			},
+			[3] = {
+				"orbit", "promote", "cmds", "rj", "gravity", "anchor"
+			}
+		}
+		
+		local TotalPages = #Pages
+		local Page = Split[2] or 1
+
+		if Pages[Page] then
+			functions.BotChat(1, "Listed Commands for Page "..Page)
+			task.wait(0.75)
+			functions.BotChat(1, Pages[Page])
+		elseif Page > TotalPages then
+			functions.BotChat(1, "The max page number is "..TotalPages)
+		else
+			functions.BotChat(1, "An error occured while grabbing that page")
+		end
 	end
 	if Cmd == Prefix.."version" then
 		local liveversion = loadstring(game:HttpGet("https://raw.githubusercontent.com/Itzmrchicken/DefigureBotCTRL/refs/heads/main/version.lua"))()
