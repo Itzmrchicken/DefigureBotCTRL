@@ -35,6 +35,10 @@ local Values = {
 	AntiAfk = false,
 	AntiAfkRender = nil,
 
+	Orbit = false,
+	OrbitTarget = nil,
+	OrbitRender = nil,
+
 	Fling = false,
 	FlingTarget = nil,
 	SpinINST = nil,
@@ -65,7 +69,8 @@ local CommandDef = {
 	["version"] = "Script version",
 	["fling"] = "Makes the provided user not exist anymore. USE: fling {user}",
 	["promote"] = "Promotes the script to others",
-	["antiafk"] = "Bots don't get disconnected for idling"
+	["antiafk"] = "Bots don't get disconnected for idling",
+	["orbit"] = "Makes the bots orbit a provided player. USE: orbit {user} {speed} {distant}"
 }
 
 return function(Msg, functions)
@@ -120,7 +125,7 @@ return function(Msg, functions)
 		
 						print(UserHRP.Position)
 	
-						if not Values.Follow then return end
+						if not Values.Follow then workspace.Gravity = GlobalValues.Gravity return end
 		
 						-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Follow = false FollowRender = nil end
 		
@@ -129,6 +134,41 @@ return function(Msg, functions)
 				end)
 
 				break
+			end
+		end
+	end
+	if Cmd == Prefix.."orbit" then
+		local User = functions.GetPlayer(Split[2])
+		local UserCharacter = User and User.Character
+
+		local Speed = Split[3] or 1
+		local Radius = Split[4] or 10
+		
+		local Angle = math.random() * math.pi * 2
+
+		Values.Orbit = Values.OrbitTarget and true or false
+
+		for _, v in pairs(Bots) do
+			if lp.Name == v then
+				workspace.Gravity = 0
+				
+				task.spawn(function()
+					Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
+						if not Values.Orbit then return end
+
+						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+
+						local Character = lp.Character
+						local HRP = Character and Character.HumanoidRootPart
+
+						if UserHRP or Character.Humanoid.Health <= 0 then Values.Orbit = false workspace.Gravity = GlobalValues.Gravity return end
+
+						Angle = Angle + Speed * DeltaTime
+
+						local Offset = Vector3.new(math.cos(Angle) * Radius, 0, math.sin(Angle) * Radius)
+						HRP.CFrame = CFrame.new(UserHRP.Position + Offset, UserHRP.Position)
+					end)
+				end)
 			end
 		end
 	end
