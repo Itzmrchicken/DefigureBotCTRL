@@ -64,6 +64,8 @@ function functions.GetPlayer(Username)
 end
 
 function functions.load()
+      if lp.Name == Master then return end
+      
       print("###########################")
       print("###########################")
       print("🔁Loading DefigureBotCTRL...🔁")
@@ -119,7 +121,7 @@ function functions.load()
       		break
       	end
       
-      	task.wait(0.5)
+      	task.wait()
       end
       
       print("✅Bots Loaded✅")
