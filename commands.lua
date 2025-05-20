@@ -92,7 +92,7 @@ return function(Msg, functions)
 		Prefix = Split[2] or Prefix
 	end
 	if Cmd == Prefix.."promote" then
-		functions.ChatAll("Want the script? Join today, vRQgE5qtUx")
+		functions.ChatAll("Want the script? Join today, vRQgE5qtUx. We have an amazing community. Tutorials on how to use as well!")
 	end
 	if Cmd == Prefix.."follow" then
 		local User = functions.GetPlayer(Split[2])
