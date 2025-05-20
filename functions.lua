@@ -85,7 +85,7 @@ function functions.load()
                         Whitelist = getgenv().Data.WhitelistControl
                               
                         if player.Name == Master or table.find(Whitelist, player.Name) then
-                              SendCommand(Message, functions)
+                              SendCommand(Message.Text, functions)
                         end
                   end
             else
@@ -104,7 +104,7 @@ function functions.load()
                         Whitelist = getgenv().Data.WhitelistControl
                               
                         if player.Name == Master or table.find(Whitelist, player.Name) then
-                              SendCommand(Message, functions)
+                              SendCommand(Message.Text, functions)
                         end
                   end
             else
