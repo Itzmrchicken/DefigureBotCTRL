@@ -71,7 +71,13 @@ function functions.GetPlayer(Username)
 end
 
 function functions.load()
-      if lp.Name == Master then return end
+      if lp.Name == Master then
+            print("###########################")
+            print("###########################")
+            print("✅Loaded DefigurBotCTRL on MASTER✅")
+
+            return
+      end
       
       print("###########################")
       print("###########################")
@@ -80,42 +86,22 @@ function functions.load()
       task.wait(1)
       
       for _, player in pairs(Players:GetPlayers()) do
-            if IsModernChat then
-                  TextChatService.OnOutgoingMessage = function(message)
-                        Whitelist = getgenv().Data.WhitelistControl
-                              
-                        if player.Name == Master or table.find(Whitelist, player.Name) then
-                              SendCommand(Message.Text, functions)
-                        end
-                  end
-            else
-                  player.Chatted:Connect(function(Message)
-                        Whitelist = getgenv().Data.WhitelistControl
+            player.Chatted:Connect(function(Message)
+                  Whitelist = getgenv().Data.WhitelistControl
                                     
-                        if player.Name == Master or table.find(Whitelist, player.Name) then
-                              SendCommand(Message, functions)
-                        end
-                  end)
-            end
+                  if player.Name == Master or table.find(Whitelist, player.Name) then
+                        SendCommand(Message, functions)
+                  end
+            end)
       end
       Players.PlayerAdded:Connect(function(player)
-            if IsModernChat then
-                  TextChatService.OnOutgoingMessage = function(message)
-                        Whitelist = getgenv().Data.WhitelistControl
-                              
-                        if player.Name == Master or table.find(Whitelist, player.Name) then
-                              SendCommand(Message.Text, functions)
-                        end
-                  end
-            else
-                  player.Chatted:Connect(function(Message)
-                        Whitelist = getgenv().Data.WhitelistControl
+            player.Chatted:Connect(function(Message)
+                  Whitelist = getgenv().Data.WhitelistControl
                                     
-                        if player.Name == Master or table.find(Whitelist, player.Name) then
-                              SendCommand(Message, functions)
-                        end
-                  end)
-            end
+                  if player.Name == Master or table.find(Whitelist, player.Name) then
+                        SendCommand(Message, functions)
+                  end
+            end)
       end)
       for i, v in pairs(Bots) do
       	if lp.Name == v then
