@@ -87,7 +87,7 @@ function functions.load()
                         if player.Name == Master or table.find(Whitelist, player.Name) then
                               SendCommand(Message, functions)
                         end
-                  end)
+                  end
             else
                   player.Chatted:Connect(function(Message)
                         Whitelist = getgenv().Data.WhitelistControl
@@ -106,7 +106,7 @@ function functions.load()
                         if player.Name == Master or table.find(Whitelist, player.Name) then
                               SendCommand(Message, functions)
                         end
-                  end)
+                  end
             else
                   player.Chatted:Connect(function(Message)
                         Whitelist = getgenv().Data.WhitelistControl
