@@ -645,7 +645,7 @@ return function(Msg, functions)
 						-- 	Spin:Destroy()
 						-- end
 								
-						HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-5, 5))
+						HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-10, 10))
 	
 						if not Values.Fling or not Values.FlingTarget or UserCharacter.Humanoid.Health <= 0 then
 							workspace.Gravity = GlobalValues.Gravity
