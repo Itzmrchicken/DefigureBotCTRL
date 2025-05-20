@@ -26,6 +26,13 @@ function functions.Chat(Msg)
   		ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Msg, "All")
   	end
 end
+function functions.IsModernChat()
+      if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+  		return false
+  	else
+  		return true
+      end  
+end
 function functions.BotChat(Username, Msg)
       local Index = table.find(Bots, Username) or Username
   
@@ -73,24 +80,42 @@ function functions.load()
       task.wait(1)
       
       for _, player in pairs(Players:GetPlayers()) do
-      	player.Chatted:Connect(function(Message)
-                  Whitelist = getgenv().Data.WhitelistControl
+            if IsModernChat then
+                  TextChatService.OnOutgoingMessage = function(message)
+                        Whitelist = getgenv().Data.WhitelistControl
                               
-                  if player.Name == Master or table.find(Whitelist, player.Name) then
-                        SendCommand(Message, functions)
-                  end
-            end)
-
-            task.wait()
+                        if player.Name == Master or table.find(Whitelist, player.Name) then
+                              SendCommand(Message, functions)
+                        end
+                  end)
+            else
+                  player.Chatted:Connect(function(Message)
+                        Whitelist = getgenv().Data.WhitelistControl
+                                    
+                        if player.Name == Master or table.find(Whitelist, player.Name) then
+                              SendCommand(Message, functions)
+                        end
+                  end)
+            end
       end
       Players.PlayerAdded:Connect(function(player)
-            player.Chatted:Connect(function(Message)
-                  Whitelist = getgenv().Data.WhitelistControl
+            if IsModernChat then
+                  TextChatService.OnOutgoingMessage = function(message)
+                        Whitelist = getgenv().Data.WhitelistControl
                               
-                  if player.Name == Master or table.find(Whitelist, player.Name) then
-                        SendCommand(Message, functions)
-                  end
-            end)
+                        if player.Name == Master or table.find(Whitelist, player.Name) then
+                              SendCommand(Message, functions)
+                        end
+                  end)
+            else
+                  player.Chatted:Connect(function(Message)
+                        Whitelist = getgenv().Data.WhitelistControl
+                                    
+                        if player.Name == Master or table.find(Whitelist, player.Name) then
+                              SendCommand(Message, functions)
+                        end
+                  end)
+            end
       end)
       for i, v in pairs(Bots) do
       	if lp.Name == v then
@@ -120,8 +145,6 @@ function functions.load()
       
       		break
       	end
-      
-      	task.wait()
       end
       
       print("✅Bots Loaded✅")
