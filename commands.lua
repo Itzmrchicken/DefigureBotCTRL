@@ -74,7 +74,8 @@ local CommandDef = {
 	["promote"] = "Promotes the script to others",
 	["antiafk"] = "Bots don't get disconnected for idling",
 	["orbit"] = "Makes the bots orbit a provided player. USE: orbit {user} {speed} {distant}",
-	["prefix"] = "Changes the prefix to run commands"
+	["prefix"] = "Changes the prefix to run commands",
+	["place"] = "Sends bots and master to provided PlaceId. USE: place {placeid}"
 }
 
 return function(Msg, functions)
@@ -93,6 +94,18 @@ return function(Msg, functions)
 	end
 	if Cmd == Prefix.."promote" then
 		functions.ChatAll("Want the script? Join today, vRQgE5qtUx. We have an amazing community. Tutorials on how to use as well!")
+	end
+	if Cmd == Prefix.."place" then
+		local TPS = game:GetService("TeleportService")
+		local MPS = game:GetService("MarketplaceService")
+
+		local ProductInfo = MPS:GetProductInfo(Split[2])
+
+		if ProductInfo then
+			TPS:TeleportAsync(Split[2], lp)
+		else
+			functions.BotChat(1, "Invalid PlaceId!")
+		end
 	end
 	if Cmd == Prefix.."follow" then
 		local User = functions.GetPlayer(Split[2])
