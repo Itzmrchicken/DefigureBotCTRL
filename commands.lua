@@ -304,7 +304,7 @@ return function(Msg, functions)
 		local Pages = {
 			[1] = {"chat", "count", "antiafk", "follow", "reset", "d", "swarm", "leave", "goto", "line", "dance", "nm"},
 			[2] = {"define", "speed", "sreset", "executor", "version", "fling", "whitelist", "aifollow", "unfollow", "unswarm", "und", "unaifollow"},
-			[3] = {"orbit", "promote", "cmds", "rj", "gravity", "anchor", "prefix"}
+			[3] = {"orbit", "promote", "cmds", "rj", "gravity", "anchor", "prefix", "place"}
 		}
 		
 		local TotalPages = #Pages
