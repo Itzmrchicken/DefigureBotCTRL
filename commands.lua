@@ -99,11 +99,16 @@ return function(Msg, functions)
 		local TPS = game:GetService("TeleportService")
 		local MPS = game:GetService("MarketplaceService")
 
-		local ProductInfo = MPS:GetProductInfo(Split[2])
+		local ProductInfo = nil
 
-		if ProductInfo then
+		local s, f = pcall(function()
+			ProductInfo = MPS:GetProductInfo(Split[2])
+		end)
+
+		if s then
 			TPS:TeleportAsync(Split[2], lp)
-		else
+		end
+		if f then
 			functions.BotChat(1, "Invalid PlaceId!")
 		end
 	end
