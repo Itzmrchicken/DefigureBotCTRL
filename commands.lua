@@ -82,7 +82,7 @@ return function(Msg, functions)
 	local Split = Msg:split(" ")
 	local Cmd = Split[1]:lower()
 
-	print(Cmd)
+	functions.Chat(1, "/w "..Master.." running "..Cmd)
 	
 	if Cmd == Prefix.."chat" then
 		local ChatMsg = Msg:gsub(Cmd, "")
