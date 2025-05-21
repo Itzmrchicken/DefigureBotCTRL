@@ -86,8 +86,6 @@ function functions.load()
       task.wait(1)
       
       for _, player in pairs(Players:GetPlayers()) do
-            if lp.Name ~= player.Name then return end
-            
             player.Chatted:Connect(function(Message)
                   Whitelist = getgenv().Data.WhitelistControl
                                     
@@ -97,8 +95,6 @@ function functions.load()
             end)
       end
       Players.PlayerAdded:Connect(function(player)
-            if lp.Name ~= player.Name then return end
-                  
             player.Chatted:Connect(function(Message)
                   Whitelist = getgenv().Data.WhitelistControl
                                     
