@@ -202,7 +202,7 @@ return function(Msg, functions)
 		if table.find(Bots, lp.Name) then
 			workspace.Gravity = 0
 
-			CurrentIndex = i
+			CurrentIndex = table.find(Bots, lp.Name)
 				
 			task.spawn(function()
 				if Values.OrbitRender then Values.OrbitRender:Disconnect() end
