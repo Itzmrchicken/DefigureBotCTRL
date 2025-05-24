@@ -38,6 +38,10 @@ local Values = {
 	AntiAfk = false,
 	AntiAfkRender = nil,
 
+	Spam = false,
+	SpamMessage = "",
+	SpamRender = nil,
+
 	Orbit = false,
 	OrbitTarget = nil,
 	OrbitRender = nil,
@@ -75,7 +79,8 @@ local CommandDef = {
 	["antiafk"] = "Bots don't get disconnected for idling",
 	["orbit"] = "Makes the bots orbit a provided player. USE: orbit {user} {speed} {distant}",
 	["prefix"] = "Changes the prefix to run commands",
-	["place"] = "Sends bots and master to provided PlaceId. USE: place {placeid}"
+	["place"] = "Sends bots and master to provided PlaceId. USE: place {placeid}",
+	["spam"] = "Spams a provided message. USE: spam {message}"
 }
 
 return function(Msg, functions)
@@ -94,6 +99,32 @@ return function(Msg, functions)
 	end
 	if Cmd == Prefix.."promote" then
 		functions.ChatAll("Want the script? Join today, vRQgE5qtUx. We have an amazing community. Tutorials on how to use as well!")
+	end
+	if Cmd == Prefix.."spam" then
+		local Message = Split[2]
+
+		Values.Spam = true
+
+		if Message then
+			for _, v in pairs(Bots) do
+				if lp.Name == v then
+					task.spawn(function()
+						Values.SpamRender = RunService.Heartbeat(function()
+							if not Values.Spam then Values.SpamRender = nil return end
+									
+							functions.Chat(Message)
+									
+							task.wait(2.5)
+						end)
+					end)
+				end
+			end
+		end
+	end
+	if Cmd == Prefix.."unspam" then
+		Values.Spam = false
+		Values.SpamMessage = ""
+		Values.SpamRender = nil
 	end
 	if Cmd == Prefix.."place" then
 		local TPS = game:GetService("TeleportService")
@@ -309,7 +340,7 @@ return function(Msg, functions)
 		local Pages = {
 			[1] = {"chat", "count", "antiafk", "follow", "reset", "d", "swarm", "leave", "goto", "line", "dance", "nm"},
 			[2] = {"define", "speed", "sreset", "executor", "version", "fling", "whitelist", "aifollow", "unfollow", "unswarm", "und", "unaifollow"},
-			[3] = {"orbit", "promote", "cmds", "rj", "gravity", "anchor", "prefix", "place"}
+			[3] = {"orbit", "promote", "cmds", "rj", "gravity", "anchor", "prefix", "place", "spam"}
 		}
 		
 		local TotalPages = #Pages
