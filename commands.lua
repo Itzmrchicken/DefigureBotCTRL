@@ -99,7 +99,7 @@ return function(Msg, functions)
 		functions.ChatAll("Want the script? Join today, vRQgE5qtUx. We have an amazing community. Tutorials on how to use as well!")
 	end
 	if Cmd == Prefix.."spam" then
-		local Message = Split[2]
+		local Message = Msg:gsub(Cmd, "")
 
 		Values.Spam = true
 
