@@ -110,22 +110,18 @@ return function(Msg, functions)
 		Values.SpamMessage = Message
 
 		if Message then
-			for _, v in pairs(Bots) do
-				if lp.Name == v then
-					if Values.SpamRender then Values.SpamRender:Disconnect() end
+			if table.find(Bots, lp.Name) then
+				if Values.SpamRender then Values.SpamRender:Disconnect() end
 					
-					task.spawn(function()
-						Values.SpamRender = RunService.Heartbeat:Connect(function()
-							if not Values.Spam then Values.SpamRender = nil return end
+				task.spawn(function()
+					Values.SpamRender = RunService.Heartbeat:Connect(function()
+						if not Values.Spam then Values.SpamRender = nil return end
 									
-							functions.Chat(Values.SpamMessage)
+						functions.Chat(Values.SpamMessage)
 									
-							task.wait(2.5)
-						end)
+						task.wait(2.5)
 					end)
-
-					break
-				end
+				end)
 			end
 		end
 	end
@@ -164,31 +160,27 @@ return function(Msg, functions)
 
 		local UserCharacter = User and User.Character
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				if Values.FollowRender then Values.FollowRender:Disconnect() end
+		if table.find(Bots, lp.Name) then
+			if Values.FollowRender then Values.FollowRender:Disconnect() end
 				
-				print(lp.Name.." has been found")
-				task.spawn(function()
-					Values.FollowRender = RunService.Heartbeat:Connect(function()
-						UserCharacter = User and User.Character
-						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+			print(lp.Name.." has been found")
+			task.spawn(function()
+				Values.FollowRender = RunService.Heartbeat:Connect(function()
+					UserCharacter = User and User.Character
+					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 	
-						local Character = lp.Character
-						local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+					local Character = lp.Character
+					local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 		
-						print(UserHRP.Position)
+					print(UserHRP.Position)
 	
-						if not Values.Follow then workspace.Gravity = GlobalValues.Gravity return end
+					if not Values.Follow then workspace.Gravity = GlobalValues.Gravity return end
 		
-						-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Follow = false FollowRender = nil end
+					-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Follow = false FollowRender = nil end
 		
-						Humanoid:MoveTo(UserHRP.Position, UserHRP)
-					end)
+					Humanoid:MoveTo(UserHRP.Position, UserHRP)
 				end)
-
-				break
-			end
+			end)
 		end
 	end
 	if Cmd == Prefix.."orbit" then
@@ -207,35 +199,31 @@ return function(Msg, functions)
 		Values.OrbitTarget = User
 		Values.Orbit = Values.OrbitTarget and true or false
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				workspace.Gravity = 0
+		if table.find(Bots, lp.Name) then
+			workspace.Gravity = 0
 
-				CurrentIndex = i
+			CurrentIndex = i
 				
-				task.spawn(function()
-					if Values.OrbitRender then Values.OrbitRender:Disconnect() end
+			task.spawn(function()
+				if Values.OrbitRender then Values.OrbitRender:Disconnect() end
 						
-					Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
-						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+				Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
+					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
-						local Character = lp.Character
-						local HRP = Character and Character.HumanoidRootPart
+					local Character = lp.Character
+					local HRP = Character and Character.HumanoidRootPart
 
-						if not Values.Orbit then workspace.Gravity = GlobalValues.Gravity Values.OrbitRender = nil Values.OrbitTarget = nil return end
+					if not Values.Orbit then workspace.Gravity = GlobalValues.Gravity Values.OrbitRender = nil Values.OrbitTarget = nil return end
 
-						Rot = Rot + DeltaTime * RotSpeed
+					Rot = Rot + DeltaTime * RotSpeed
 
-						local Angle = Rot - (CurrentIndex * Spacing)
-						local X, Z = math.sin(Angle) * Radius, math.cos(Angle) * Radius
+					local Angle = Rot - (CurrentIndex * Spacing)
+					local X, Z = math.sin(Angle) * Radius, math.cos(Angle) * Radius
 
-						local NewPos = UserHRP.Position + Vector3.new(X, 0, Z)
-						HRP.CFrame = CFrame.new(NewPos, UserHRP.Position)
-					end)
+					local NewPos = UserHRP.Position + Vector3.new(X, 0, Z)
+					HRP.CFrame = CFrame.new(NewPos, UserHRP.Position)
 				end)
-
-				break
-			end
+			end)
 		end
 	end
 	if Cmd == Prefix.."executor" then
@@ -261,39 +249,35 @@ return function(Msg, functions)
 				-- WaypointSpacing = 1,
 		})
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				if Values.AIRender then Values.AIRender:Disconnect() end
+		if table.find(Bots, lp.Name) then
+			if Values.AIRender then Values.AIRender:Disconnect() end
 				
-				print(lp.Name.." has been found")
-				task.spawn(function()
-					Values.AIRender = RunService.Heartbeat:Connect(function()
-						UserCharacter = User and User.Character
-						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+			print(lp.Name.." has been found")
+			task.spawn(function()
+				Values.AIRender = RunService.Heartbeat:Connect(function()
+					UserCharacter = User and User.Character
+					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 	
-						local Character = lp.Character
-						local HRP = Character and Character.HumanoidRootPart
-						local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+					local Character = lp.Character
+					local HRP = Character and Character.HumanoidRootPart
+					local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
 	
-						-- print(UserHRP.Position)
+					-- print(UserHRP.Position)
 	
-						NewPath:ComputeAsync(HRP.Position, UserHRP.Position)
+					NewPath:ComputeAsync(HRP.Position, UserHRP.Position)
 	
-						for i, waypoint in pairs(NewPath:GetWaypoints()) do
-							if not Values.AIFollow then return end
+					for i, waypoint in pairs(NewPath:GetWaypoints()) do
+						if not Values.AIFollow then return end
 	
-							if waypoint.Action == Enum.PathWaypointAction.Jump then
-								Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-							end
-								
-							Humanoid:MoveTo(waypoint.Position)
-							Humanoid.MoveToFinished:Wait(5)
+						if waypoint.Action == Enum.PathWaypointAction.Jump then
+							Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 						end
-					end)
+								
+						Humanoid:MoveTo(waypoint.Position)
+						Humanoid.MoveToFinished:Wait(5)
+					end
 				end)
-
-				break
-			end
+			end)
 		end
 	end
 	if Cmd == Prefix.."unaifollow" then
@@ -306,19 +290,15 @@ return function(Msg, functions)
 		Values.AntiAfk = not Values.AntiAfk
 
 		if Values.AntiAfk then
-			for _, v in pairs(Bots) do
-				if lp.Name == v then
-					if Values.AntiAfkRender then Values.AntiAfkRender:Disconnect() end
+			if table.find(Bots, lp.Name) then
+				if Values.AntiAfkRender then Values.AntiAfkRender:Disconnect() end
 					
-					task.spawn(function()
-						Values.AntiAfkRender = lp.Idled:Connect(function()
-							VirtualUser:CaptureController()
-							VirtualUser:ClickButton2(Vector2.new())
-						end)
+				task.spawn(function()
+					Values.AntiAfkRender = lp.Idled:Connect(function()
+						VirtualUser:CaptureController()
+						VirtualUser:ClickButton2(Vector2.new())
 					end)
-					
-					break
-				end
+				end)
 			end
 		else
 			Values.AntiAfkRender = nil
@@ -414,21 +394,13 @@ return function(Msg, functions)
 	if Cmd == Prefix.."reset" then
 		functions.ChatAll("Resetting...")
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				lp.Character.Humanoid.Health = 0
-
-				break
-			end
+		if table.find(Bots, lp.Name) then
+			lp.Character.Humanoid.Health = 0
 		end
 	end
 	if Cmd == Prefix.."sreset" then
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				lp.Character.Humanoid.Health = 0
-
-				break
-			end
+		if table.find(Bots, lp.Name) then
+			lp.Character.Humanoid.Health = 0
 		end
 	end
 	if Cmd == Prefix.."rj" then
@@ -438,14 +410,8 @@ return function(Msg, functions)
 
 		task.wait(math.random(1, 2.5))
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				TPS:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
-
-				break
-			end
-
-			task.wait()
+		if table.find(Bots, lp.Name) then
+			TPS:TeleportToPlaceInstance(game.PlaceId, game.JobId, lp)
 		end
 	end
 	if Cmd == Prefix.."swarm" then
@@ -461,31 +427,27 @@ return function(Msg, functions)
 
 		local UserCharacter = User and User.Character
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				if Values.SwarmRender then Values.SwarmRender:Disconnect() end
+		if table.find(Bots, lp.Name) then
+			if Values.SwarmRender then Values.SwarmRender:Disconnect() end
 				
-				print(lp.Name.." has been found")
-				workspace.Gravity = 0
-				task.spawn(function()
-					Values.SwarmRender = RunService.Heartbeat:Connect(function()
-						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+			print(lp.Name.." has been found")
+			workspace.Gravity = 0
+			task.spawn(function()
+				Values.SwarmRender = RunService.Heartbeat:Connect(function()
+					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 	
-						local Character = lp.Character
-						local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
+					local Character = lp.Character
+					local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
 	
-						if not Values.Swarm or UserCharacter.Humanoid.Health <= 0 then return end
+					if not Values.Swarm or UserCharacter.Humanoid.Health <= 0 then return end
 	
-						print(UserHRP.Position)
+					print(UserHRP.Position)
 	
-						-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Swarm = false workspace.Gravity = GlobalValues.Gravity SwarmRender = nil end
+					-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Swarm = false workspace.Gravity = GlobalValues.Gravity SwarmRender = nil end
 	
-						HRP.CFrame = UserHRP.CFrame * CFrame.new(math.random(-10, 10), math.random(-10, 10), math.random(-10, 10))
-					end)
+					HRP.CFrame = UserHRP.CFrame * CFrame.new(math.random(-10, 10), math.random(-10, 10), math.random(-10, 10))
 				end)
-
-				break
-			end
+			end)
 		end
 	end
 	if Cmd == Prefix.."leave" then
@@ -493,12 +455,8 @@ return function(Msg, functions)
 
 		task.wait(1)
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				lp:Kick("Master kicked bots")
-
-				break
-			end
+		if table.find(Bots, lp.Name) then
+			lp:Kick("Master kicked bots")
 		end
 	end
 	if Cmd == Prefix.."goto" then
@@ -511,17 +469,13 @@ return function(Msg, functions)
 		local UserCharacter = User and User.Character
 		local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				local Character = lp.Character
-				local HRP = Character and Character.HumanoidRootPart
+		if table.find(Bots, lp.Name) then
+			local Character = lp.Character
+			local HRP = Character and Character.HumanoidRootPart
 
-				if not HRP then return functions.BotChat(1, "This user doesn't exist or an error occured") end
+			if not HRP then return functions.BotChat(1, "This user doesn't exist or an error occured") end
 
-				HRP.CFrame = UserHRP.CFrame
-
-				break
-			end
+			HRP.CFrame = UserHRP.CFrame
 		end
 	end
 	if Cmd == Prefix.."line" then
@@ -539,35 +493,31 @@ return function(Msg, functions)
 
 		local UserCharacter = User and User.Character
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				if Values.LineRender then Values.LineRender:Disconnect() end
+		if table.find(Bots, lp.Name) then
+			if Values.LineRender then Values.LineRender:Disconnect() end
 				
-				print(lp.Name.." has been found")
-				task.spawn(function()
-					Values.LineRender = RunService.Heartbeat:Connect(function()
-						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+			print(lp.Name.." has been found")
+			task.spawn(function()
+				Values.LineRender = RunService.Heartbeat:Connect(function()
+					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 	
-						local Character = lp.Character
-						local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
+					local Character = lp.Character
+					local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
 	
-						if not Values.Line or UserCharacter.Humanoid.Health <= 0 then return end
+					if not Values.Line or UserCharacter.Humanoid.Health <= 0 then return end
 	
-						print(UserHRP.Position)
+					print(UserHRP.Position)
 	
-						-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Line = false LineRender = nil end
+					-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.Line = false LineRender = nil end
 	
-						local Offset = UserHRP.CFrame.LookVector * (Spacing * table.find(Bots, lp.Name))
-						HRP.CFrame = UserHRP.CFrame + Offset
-					end)
+					local Offset = UserHRP.CFrame.LookVector * (Spacing * table.find(Bots, lp.Name))
+					HRP.CFrame = UserHRP.CFrame + Offset
 				end)
-
-				break
-			end
+			end)
 		end
 	end
 	if Cmd == Prefix.."dance" then
-		local DanceType = "/e dance"..(Split[2] or math.random(1, 3))
+		local DanceType = "/e dance"..(Split[2] or "")
 
 		functions.ChatAll(DanceType)
 	end
@@ -603,40 +553,32 @@ return function(Msg, functions)
 
 		local UserCharacter = User and User.Character
 
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				if Values.DRender then Values.DRender:Disconnect() end
+		if table.find(Bots, lp.Name) then
+			if Values.DRender then Values.DRender:Disconnect() end
 				
-				print(lp.Name.." has been found")
-				task.spawn(function()
-					Values.DRender = RunService.Heartbeat:Connect(function()
-						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
+			print(lp.Name.." has been found")
+			task.spawn(function()
+				Values.DRender = RunService.Heartbeat:Connect(function()
+					local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 	
-						local Character = lp.Character
-						local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
+					local Character = lp.Character
+					local HRP = Character and Character:FindFirstChild("HumanoidRootPart")
 	
-						if not Values.D or UserCharacter.Humanoid.Health <= 0 then return end
+					if not Values.D or UserCharacter.Humanoid.Health <= 0 then return end
 	
-						print(UserHRP.Position)
+					print(UserHRP.Position)
 	
-						-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.D = false DRender = nil end
+					-- if not UserHRP or not UserCharacter or not User then warn("User died, left, or random error") Values.D = false DRender = nil end
 	
-						local Offset = UserHRP.CFrame.LookVector * (3 * table.find(Bots, lp.Name))
-						HRP.CFrame = UserHRP.CFrame * CFrame.new(0, -1, 0) * CFrame.Angles(-math.rad(90), 0, 0) + Offset
-					end)
+					local Offset = UserHRP.CFrame.LookVector * (3 * table.find(Bots, lp.Name))
+					HRP.CFrame = UserHRP.CFrame * CFrame.new(0, -1, 0) * CFrame.Angles(-math.rad(90), 0, 0) + Offset
 				end)
-
-				break
-			end
+			end)
 		end
 	end
 	if Cmd == Prefix.."speed" then
-		for i, v in pairs(Bots) do
-			if lp.Name == v then
-				lp.Character.Humanoid.WalkSpeed = Split[2] or 16
-
-				break
-			end
+		if table.find(Bots, lp.Name) then
+			lp.Character.Humanoid.WalkSpeed = Split[2] or 16
 		end
 	end
 	if Cmd == Prefix.."count" then
@@ -660,59 +602,62 @@ return function(Msg, functions)
 
 		Values.Fling = Values.FlingTarget and true or false
 
+		if table.find(Bots, lp.Name) then
+			workspace.Gravity = 0
+
+			local Character = lp.Character
+			local HRP = Character and Character.HumanoidRootPart
+
+			local Spin = Instance.new("BodyAngularVelocity")
+			Spin.Name = "Fling"
+			Spin.Parent = HRP
+			Spin.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+			Spin.AngularVelocity = Vector3.new(9999, 9999, 9999)
+
+			-- local FlingVal = Instance.new("BodyVelocity")
+			-- FlingVel.Name = "FlingVel"
+			-- FlingVel.Parent = HRP
+			-- FlingVel.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+			-- FlingVel.Velocity = Vector3.new(250, 250, 250)
+
+			if not Values.Fling or not Values.FlingTarget then
+				workspace.Gravity = GlobalValues.Gravity
+				Values.Fling = false
+				Spin:Destroy()
+				-- FlingVal:Destroy()
+			end
+
+			for _, v in pairs(UserCharacter:GetChildren()) do
+				if v:IsA("BasePart") then
+					v.CanCollide = false
+				end
+			end
+
+			task.spawn(function()
+				Values.FlingRender = RunService.Heartbeat:Connect(function()
+					-- if not UserHRP then
+					-- 	workspace.Gravity = GlobalValues.Gravity
+					-- 	Values.Fling = false
+					-- 	Values.FlingTarget = nil
+					-- 	Spin:Destroy()
+					-- end
+								
+					HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-10, 10))
+	
+					if not Values.Fling or not Values.FlingTarget or UserCharacter.Humanoid.Health <= 0 then
+						workspace.Gravity = GlobalValues.Gravity
+						Values.Fling = false
+						Values.FlingTarget = nil
+						Spin:Destroy()
+						-- FlingVal:Destroy()
+					end
+				end)
+			end)
+		end
+
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
-				workspace.Gravity = 0
-
-				local Character = lp.Character
-				local HRP = Character and Character.HumanoidRootPart
-
-				local Spin = Instance.new("BodyAngularVelocity")
-				Spin.Name = "Fling"
-				Spin.Parent = HRP
-				Spin.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-				Spin.AngularVelocity = Vector3.new(9999, 9999, 9999)
-
-				-- local FlingVal = Instance.new("BodyVelocity")
-				-- FlingVel.Name = "FlingVel"
-				-- FlingVel.Parent = HRP
-				-- FlingVel.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-				-- FlingVel.Velocity = Vector3.new(250, 250, 250)
-
-				if not Values.Fling or not Values.FlingTarget then
-					workspace.Gravity = GlobalValues.Gravity
-					Values.Fling = false
-					Spin:Destroy()
-					-- FlingVal:Destroy()
-				end
-
-				for _, v in pairs(UserCharacter:GetChildren()) do
-					if v:IsA("BasePart") then
-						v.CanCollide = false
-					end
-				end
-
-				task.spawn(function()
-					Values.FlingRender = RunService.Heartbeat:Connect(function()
-						-- if not UserHRP then
-						-- 	workspace.Gravity = GlobalValues.Gravity
-						-- 	Values.Fling = false
-						-- 	Values.FlingTarget = nil
-						-- 	Spin:Destroy()
-						-- end
-								
-						HRP.CFrame = UserHRP.CFrame * CFrame.new(0, 0, math.random(-10, 10))
-	
-						if not Values.Fling or not Values.FlingTarget or UserCharacter.Humanoid.Health <= 0 then
-							workspace.Gravity = GlobalValues.Gravity
-							Values.Fling = false
-							Values.FlingTarget = nil
-							Spin:Destroy()
-							-- FlingVal:Destroy()
-						end
-					end)
-				end)
-
+				
 				break
 			end
 		end
@@ -723,14 +668,8 @@ return function(Msg, functions)
 	if Cmd == Prefix.."anchor" then
 		functions.BotChat(1, lp.Character.HumanoidRootPart.Anchored and "Unanchoring bots..." or "Anchoring bots...")
 		
-		for _, v in pairs(Bots) do
-			if lp.Name == v then
-				lp.Character.HumanoidRootPart.Anchored = not lp.Character.HumanoidRootPart.Anchored
-
-				break
-			end
-
-			task.wait()
+		if table.find(Bots, lp.Name) then
+			lp.Character.HumanoidRootPart.Anchored = not lp.Character.HumanoidRootPart.Anchored
 		end
 	end
 end
