@@ -100,22 +100,25 @@ return function(Msg, functions)
 	end
 	if Cmd == Prefix.."unorbit" then
 		Values.Orbit = false
-		Values.OrbitRender = nil
+		if Values.OrbitRender then Values.OrbitRender:Disconnect() end
 		Values.OrbitTarget = nil
 	end
 	if Cmd == Prefix.."spam" then
 		local Message = Msg:gsub(Cmd, "")
 
 		Values.Spam = true
+		Values.SpamMessage = Message
 
 		if Message then
 			for _, v in pairs(Bots) do
 				if lp.Name == v then
+					if Values.SpamRender then Values.SpamRender:Disconnect() end
+					
 					task.spawn(function()
 						Values.SpamRender = RunService.Heartbeat:Connect(function()
 							if not Values.Spam then Values.SpamRender = nil return end
 									
-							functions.Chat(Message)
+							functions.Chat(Values.SpamMessage)
 									
 							task.wait(2.5)
 						end)
@@ -129,7 +132,7 @@ return function(Msg, functions)
 	if Cmd == Prefix.."unspam" then
 		Values.Spam = false
 		Values.SpamMessage = ""
-		Values.SpamRender = nil
+		if Values.SpamRender then Values.SpamRender:Disconnect() end
 	end
 	if Cmd == Prefix.."place" then
 		local TPS = game:GetService("TeleportService")
@@ -150,21 +153,12 @@ return function(Msg, functions)
 	end
 	if Cmd == Prefix.."follow" then
 		local User = functions.GetPlayer(Split[2])
-
-		if Split[2] == "random" then
-			User = Players:GetPlayers()[math.random(1, #Players:GetPlayers())]
-
-			while User.Name ~= lp.Name and task.wait() do
-				User = Players:GetPlayers()[math.random(1, #Players:GetPlayers())]
-			end
-		end
+		
 		if Split[2] == "me" then
 			User = Players:FindFirstChild(Master)
 		end
 
 		Values.FollowTarget = User
-
-		print(User, UserCharacter)
 
 		Values.Follow = Values.FollowTarget and true or false
 
@@ -172,6 +166,8 @@ return function(Msg, functions)
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
+				if Values.FollowRender then Values.FollowRender:Disconnect() end
+				
 				print(lp.Name.." has been found")
 				task.spawn(function()
 					Values.FollowRender = RunService.Heartbeat:Connect(function()
@@ -218,7 +214,7 @@ return function(Msg, functions)
 				CurrentIndex = i
 				
 				task.spawn(function()
-					if Values.OrbitRender then Values.OrbitRender = nil end
+					if Values.OrbitRender then Values.OrbitRender:Disconnect() end
 						
 					Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
 						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
@@ -267,6 +263,8 @@ return function(Msg, functions)
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
+				if Values.AIRender then Values.AIRender:Disconnect() end
+				
 				print(lp.Name.." has been found")
 				task.spawn(function()
 					Values.AIRender = RunService.Heartbeat:Connect(function()
@@ -302,7 +300,7 @@ return function(Msg, functions)
 		Values.AIFollow = false
 		Values.AIFollowTarget = nil
 
-		Values.AIRender = nil
+		if Values.AIRender then Values.AIRender:Disconnect() end
 	end
 	if Cmd == Prefix.."antiafk" then
 		Values.AntiAfk = not Values.AntiAfk
@@ -310,9 +308,13 @@ return function(Msg, functions)
 		if Values.AntiAfk then
 			for _, v in pairs(Bots) do
 				if lp.Name == v then
-					Values.AntiAfkRender = lp.Idled:Connect(function()
-						VirtualUser:CaptureController()
-						VirtualUser:ClickButton2(Vector2.new())
+					if Values.AntiAfkRender then Values.AntiAfkRender:Disconnect() end
+					
+					task.spawn(function()
+						Values.AntiAfkRender = lp.Idled:Connect(function()
+							VirtualUser:CaptureController()
+							VirtualUser:ClickButton2(Vector2.new())
+						end)
 					end)
 					
 					break
@@ -328,20 +330,20 @@ return function(Msg, functions)
 		Values.Swarm = false
 		Values.SwarmTarget = nil
 
-		Values.SwarmRender = nil
+		if Values.SwarmRender then Values.SwarmRender:Disconnect() end
 		workspace.Gravity = GlobalValues.Gravity
 	end
 	if Cmd == Prefix.."und" then
 		Values.D = false
 		Values.DTarget = nil
 
-		Values.DRender = nil
+		if Values.DRender then Values.DRender:Disconnect() end
 	end
 	if Cmd == Prefix.."unfollow" then
 		Values.Follow = false
 		Values.FollowTarget = nil
 
-		Values.FollowRender = nil
+		if Values.FollowRender then Values.FollowRender:Disconnect() end
 	end
 	if Cmd == Prefix.."cmds" then
 		local Pages = {
@@ -449,14 +451,6 @@ return function(Msg, functions)
 	if Cmd == Prefix.."swarm" then
 		local User = functions.GetPlayer(Split[2])
 
-		if Split[2] == "random" then
-			User = Players:GetPlayers()[math.random(1, #Players:GetPlayers())]
-
-			while User.Name ~= lp.Name and task.wait() do
-				User = Players:GetPlayers()[math.random(1, #Players:GetPlayers())]
-			end
-		end
-
 		if Split[2] == "me" then
 			User = Players:FindFirstChild(Master)
 		end
@@ -469,6 +463,8 @@ return function(Msg, functions)
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
+				if Values.SwarmRender then Values.SwarmRender:Disconnect() end
+				
 				print(lp.Name.." has been found")
 				workspace.Gravity = 0
 				task.spawn(function()
@@ -545,6 +541,8 @@ return function(Msg, functions)
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
+				if Values.LineRender then Values.LineRender:Disconnect() end
+				
 				print(lp.Name.." has been found")
 				task.spawn(function()
 					Values.LineRender = RunService.Heartbeat:Connect(function()
@@ -607,6 +605,8 @@ return function(Msg, functions)
 
 		for i, v in pairs(Bots) do
 			if lp.Name == v then
+				if Values.DRender then Values.DRender:Disconnect() end
+				
 				print(lp.Name.." has been found")
 				task.spawn(function()
 					Values.DRender = RunService.Heartbeat:Connect(function()
