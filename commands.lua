@@ -115,6 +115,8 @@ return function(Msg, functions)
 							task.wait(2.5)
 						end)
 					end)
+
+					break
 				end
 			end
 		end
