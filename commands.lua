@@ -218,13 +218,15 @@ return function(Msg, functions)
 				CurrentIndex = i
 				
 				task.spawn(function()
+					if Values.OrbitRender then Values.OrbitRender = nil end
+						
 					Values.OrbitRender = RunService.Heartbeat:Connect(function(DeltaTime)
 						local UserHRP = UserCharacter and UserCharacter.HumanoidRootPart
 
 						local Character = lp.Character
 						local HRP = Character and Character.HumanoidRootPart
 
-						if Values.Orbit == false then workspace.Gravity = GlobalValues.Gravity return end
+						if not Values.Orbit then workspace.Gravity = GlobalValues.Gravity Values.OrbitRender = nil Values.OrbitTarget = nil return end
 
 						Rot = Rot + DeltaTime * RotSpeed
 
