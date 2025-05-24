@@ -98,6 +98,11 @@ return function(Msg, functions)
 	if Cmd == Prefix.."promote" then
 		functions.ChatAll("Want the script? Join today, vRQgE5qtUx. We have an amazing community. Tutorials on how to use as well!")
 	end
+	if Cmd == Prefix.."unorbit" then
+		Values.Orbit = false
+		Values.OrbitRender = nil
+		Values.OrbitTarget = nil
+	end
 	if Cmd == Prefix.."spam" then
 		local Message = Msg:gsub(Cmd, "")
 
