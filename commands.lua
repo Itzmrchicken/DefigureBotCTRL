@@ -86,8 +86,6 @@ local CommandDef = {
 return function(Msg, functions)
 	local Split = Msg:split(" ")
 	local Cmd = Split[1]:lower()
-
-	functions.BotChat(1, "Running "..Cmd)
 	
 	if Cmd == Prefix.."chat" then
 		local ChatMsg = Msg:gsub(Cmd, "")
