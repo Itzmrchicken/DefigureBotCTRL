@@ -109,7 +109,7 @@ return function(Msg, functions)
 			for _, v in pairs(Bots) do
 				if lp.Name == v then
 					task.spawn(function()
-						Values.SpamRender = RunService.Heartbeat(function()
+						Values.SpamRender = RunService.Heartbeat:Connect(function()
 							if not Values.Spam then Values.SpamRender = nil return end
 									
 							functions.Chat(Message)
