@@ -26,13 +26,6 @@ function functions.Chat(Msg)
   		ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Msg, "All")
   	end
 end
-function functions.IsModernChat()
-      if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
-  		return false
-  	else
-  		return true
-      end  
-end
 function functions.BotChat(Username, Msg)
       local Index = table.find(Bots, Username) or Username
   
@@ -47,15 +40,9 @@ function functions.BotChat(Username, Msg)
   	end
 end
 function functions.ChatAll(Msg)
-    for i, v in pairs(Bots) do
-  		if lp.Name == v then
-  			functions.Chat(Msg)
-  
-  			break
-  		end
-
-            task.wait()
-  	end
+      if table.find(Bots, lp.Name) then
+            functions.Chat(Msg)
+      end
 end
 
 function functions.GetPlayer(Username)
